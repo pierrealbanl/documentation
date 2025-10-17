@@ -12,7 +12,7 @@ module.exports = {
                 'category/css'
             ],
         },
-        'the-road-to-english-mastery',
+        'english-mastery-guide',
         'raccourcis-ide'
     ],
 }

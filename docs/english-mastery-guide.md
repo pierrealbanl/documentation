@@ -1,9 +1,9 @@
 ---
-id: the-road-to-english-mastery
-title: The Road to English Mastery
+id: english-mastery-guide
+title: The English Mastery Guide
 ---
 
-# The Road to English Mastery
+# Maîtriser l'anglais
 
 Guide pédagogique conçu pour aider les apprenants à mieux maîtriser la langue anglaise. Il couvre plusieurs aspects fondamentaux de la grammaire, du vocabulaire et de l’usage courant de l’anglais.
 
