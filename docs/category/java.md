@@ -47,7 +47,7 @@ class Vehicle {
 public class Main {
     public static void main(String[] args) {
         Vehicle ferrari = new Vehicle(1380, 570);
-        System.out.println("Ferrari after 10 seconds: " + ferrari.calculateSpeed(10) + " km/h");
+        System.out.println("La ferrari après 10 secondes : " + ferrari.calculateSpeed(10) + " km/h");
     }
 }
 ```
@@ -254,7 +254,7 @@ class Vehicle {
 public class Main {
     public static void main(String[] args) {
         Vehicle ferrari = new Vehicle(1380, 570);
-        System.out.println("Ferrari after 10 seconds: " + ferrari.calculateSpeed(10) + " km/h");
+        System.out.println("La ferrari après 10 secondes : " + ferrari.calculateSpeed(10) + " km/h");
     }
 }
 ```
@@ -287,7 +287,7 @@ public class Main {
         Vehicle ferrari = new Vehicle(1380, 570);
         // Erreur de compilation
 
-        System.out.println("Ferrari après 10 secondes : " + ferrari.calculateSpeed(10) + " km/h");
+        System.out.println("La ferrari après 10 secondes : " + ferrari.calculateSpeed(10) + " km/h");
         // Erreur de compilation
     }
 }
@@ -342,7 +342,7 @@ package example;
 public class Main {
     public static void main(String[] args) {
         Car ferrari = new Car(1380, 570);
-        System.out.println("Ferrari after 10 seconds: " + ferrari.calculateSpeed(10) + " km/h");
+        System.out.println("La ferrari après 10 secondes : " + ferrari.calculateSpeed(10) + " km/h");
     }
 }
 ```
@@ -381,7 +381,7 @@ package example;
 public class Main {
     public static void main(String[] args) {
         Vehicle ferrari = new Vehicle(1380, 570);
-        System.out.println("Ferrari after 10 seconds: " + ferrari.calculateSpeed(10) + " km/h");
+        System.out.println("La ferrari après 10 secondes : " + ferrari.calculateSpeed(10) + " km/h");
     }
 }
 ```
@@ -436,13 +436,107 @@ public class Main {
 ```
 :::
 
-### 5.2. Pour les propriétés et méthodes
+### 5.2. Pour les propriétés et méthodes : `final`, `abstract` et `static`
 
-| **Modificateur** | **Description**                                                                                                                                                                                             |
-|:-----------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `final`          | Empêche toute modification ou redéfinition : une propriété `final` ne peut être assigné qu’une seule fois et une méthode `final` ne peut pas être redéfinie dans une sous-classe.                           |
-| `abstract`       | Utilisé uniquement dans une classe abstraite, et uniquement pour des méthodes. Une méthode abstraite ne possède pas de corps (ex. `abstract void run();`). Elle doit être implémentée dans la sous-classe.  |
-| `static`         | Associe la propriété ou la méthode à la classe elle-même, et non à une instance. Pas besoin de créer un objet pour y accéder.                                                                               |
+| **Modificateur** | **Description**                                                                                                                                                                   |
+|:-----------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `final`          | Empêche toute modification ou redéfinition : une propriété `final` ne peut être assigné qu’une seule fois et une méthode `final` ne peut pas être redéfinie dans une sous-classe. |
+
+```
+class Vehicle {
+    final double weight;
+    final double enginePower;
+
+    Vehicle (double weight, double enginePower) {
+        this.weight = weight;
+        this.enginePower = enginePower;
+    }
+
+    final double ferrariWeight() {
+        return this.weight = 1380; // Erreur de compilation
+    }
+
+    final double calculateSpeed(float seconds) {
+        return (enginePower / weight) * seconds;
+    }
+}
+
+class Car extends Vehicle {
+    Car(double weight, double enginePower) {
+        super(weight, enginePower);
+    }
+
+    double ferrariWeight() { // Erreur de compilation
+        return this.weight;
+    }
+
+    double calculateSpeed(float seconds) { // Erreur de compilation
+        return (enginePower / weight) * seconds;
+    }
+}
+```
+
+---
+
+| **Modificateur** | **Description**                                                                                                                                                                                            |
+|:-----------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `abstract`       | Utilisé uniquement dans une classe abstraite, et uniquement pour des **méthodes**. Une méthode abstraite ne possède pas de corps (ex. `abstract void run();`). Elle doit être implémentée dans la sous-classe. |
+
+```
+abstract class Vehicle {
+    abstract void startEngine(); // Méthode abstraite : pas de corps
+}
+
+class Car extends Vehicle {
+    void startEngine() {
+        System.out.println("La voiture a démarré !");
+    }
+}
+```
+
+```
+public class Main {
+    public static void main(String[] args) {
+        Car ferrari = new Car();
+        ferrari.startEngine();
+    }
+}
+```
+
+---
+
+| **Modificateur** | **Description**                                                                  |
+|:-----------------|:---------------------------------------------------------------------------------|
+| `static`         | Associe la propriété ou la méthode à la classe elle-même, et non à une instance. |
+
+
+```
+class Vehicle {
+    static String category;
+
+    static double releaseDate(double date) {
+        return date;
+    }
+}
+```
+
+```
+public class Main {
+    public static void main(String[] args) {
+        Vehicle ferrari = new Vehicle();
+        Vehicle lamborghini = new Vehicle();
+        Vehicle.category = "A1";
+
+        System.out.println("Date de sortie des voitures : " + Vehicle.releaseDate(2024));
+        System.out.println("Catégorie de la Ferrari : " + ferrari.category);
+        System.out.println("Catégorie de la Lamborghini : " + lamborghini.category);
+    }
+}
+```
+
+:::warning
+Même si on écrit `ferrari.category = "A2";`, la valeur changera aussi pour l’objet `lamborghini`. En effet, une propriété `static` est partagée par tous les objets de la classe : elle n’appartient pas à une instance, mais à la classe elle-même.
+:::
 
 ## 6. JavaBean : modèle d'encapsulation pour structurer de données
 

@@ -1,6 +1,7 @@
 module.exports = {
     adminSidebar: [
         'intro',
+        'raccourcis-ide',
         {
             type: 'category',
             label: 'Mastering the Stack: Complete Guide',
@@ -12,7 +13,6 @@ module.exports = {
                 'category/css'
             ],
         },
-        'english-mastery-guide',
-        'raccourcis-ide'
+        'english-guide'
     ],
 }

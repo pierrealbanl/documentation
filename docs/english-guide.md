@@ -1,6 +1,6 @@
 ---
-id: english-mastery-guide
-title: The English Mastery Guide
+id: english-guide
+title: Maîtriser l'anglais
 ---
 
 # Maîtriser l'anglais

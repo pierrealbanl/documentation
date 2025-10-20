@@ -38,7 +38,7 @@ const config: Config = {
         },
         prism: {
             theme: prismThemes.github,
-            darkTheme: prismThemes.dracula,
+            darkTheme: prismThemes.oceanicNext,
         },
     } satisfies Preset.ThemeConfig,
 };
