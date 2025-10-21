@@ -454,6 +454,8 @@ public class Main {
 
 ## 7. Modificateurs non liés à l'accès
 
+**Les modificateurs non liés à l’accès** permettent de préciser le comportement, l’héritage ou l’utilisation d’une classe, d’une méthode ou d’une propriété, sans pour autant influencer leur visibilité. 
+
 ### 7.1. Pour les classes : `final` et `abstract`
 
 | **Modificateur** | **Description**                                       |
