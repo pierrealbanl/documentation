@@ -6,7 +6,7 @@ sidebar_position: 2
 
 # Java
 
-<span style={{color: "#9c96ff"}}>**Java**</span> est un langage de programmation orienté objet, de haut niveau, conçu pour être portable, sécurisé et robuste. Il permet de développer une grande variété d’applications réutilisables, allant des applications mobiles aux systèmes d’entreprise.
+<span style={{color: "#0f62fe"}}>**Java**</span> est un langage de programmation orienté objet, de haut niveau, conçu pour être portable, sécurisé et robuste. Il permet de développer une grande variété d’applications réutilisables, allant des applications mobiles aux systèmes d’entreprise.
 
 ### Préambule
 
@@ -182,9 +182,9 @@ public class Main {
 
 ### 4.1. Pour les classes : `public`
 
-| **Modificateur**  | **Description**                                                                                                                                   |
-|:------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------|
-| `public`          | La classe est accessible depuis n’importe quelle autre classe.                                                                                    |
+| **Modificateur**  | **Description**                                                |
+|:------------------|:---------------------------------------------------------------|
+| `public`          | La classe est accessible depuis n’importe quelle autre classe. |
 
 ```
 public class Vehicle {}
@@ -261,9 +261,9 @@ public class Main {
 
 ---
 
-| **Modificateur**  | **Description**                                                                                                       |
-|:------------------|:----------------------------------------------------------------------------------------------------------------------|
-| `private`         | Le code est accessible uniquement à l’intérieur de la classe où il est défini.                                        |
+| **Modificateur**  | **Description**                                                                |
+|:------------------|:-------------------------------------------------------------------------------|
+| `private`         | Le code est accessible uniquement à l’intérieur de la classe où il est défini. |
 
 ```
 class Vehicle {
@@ -478,8 +478,8 @@ class Car extends Vehicle {
 
 ---
 
-| **Modificateur** | **Description**                                                                                                                                                                                            |
-|:-----------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Modificateur** | **Description**                                                                                                                                                                                                |
+|:-----------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `abstract`       | Utilisé uniquement dans une classe abstraite, et uniquement pour des **méthodes**. Une méthode abstraite ne possède pas de corps (ex. `abstract void run();`). Elle doit être implémentée dans la sous-classe. |
 
 ```
@@ -589,7 +589,6 @@ public class Vehicle {
     private double weight;
     private double enginePower;
 
-
     public Vehicle(double weight, double enginePower) {
         this.weight = weight;
         this.enginePower = enginePower;
@@ -601,36 +600,22 @@ public class Vehicle {
 }
 
 class Car extends Vehicle {
-    private int nbOfPassengers;
-
-    public Car (double weight, double enginePower, int nbOfPassengers) {
+    public Car (double weight, double enginePower) {
         super(weight, enginePower);
-        this.nbOfPassengers = nbOfPassengers;
     }
 
     public double calculateSpeed(float seconds) {
         return super.calculateSpeed(seconds);
-    }
-
-    public void smoothSuspension () {
-        System.out.println("Smooth suspension activated!");
     }
 }
 
 class Truck extends Vehicle {
-    private double payload;
-
-    public Truck (double weight, double enginePower, double payload) {
+    public Truck (double weight, double enginePower) {
         super(weight, enginePower);
-        this.payload = payload;
     }
 
     public double calculateSpeed(float seconds) {
         return super.calculateSpeed(seconds);
-    }
-    
-    public void hardSuspension () {
-        System.out.println("Hard suspension activated!");
     }
 }
 ```
@@ -638,11 +623,11 @@ class Truck extends Vehicle {
 ```
 public class Main {
     public static void main(String[] args) {
-        Vehicle ferrari = new Car(1380, 570, 135);
-        Vehicle mercedes = new Truck(11700, 625, 4000);
+        Vehicle ferrari = new Car(1380, 570);
+        Vehicle mercedes = new Truck(11700, 625);
 
-        System.out.println("Ferrari after 10 seconds: " + ferrari.calculateSpeed(10) + " km/h");
-        System.out.println("Mercedes after 10 seconds: " + mercedes.calculateSpeed(10) + " km/h");
+        System.out.println("La ferrari après 10 secondes : " + ferrari.calculateSpeed(10) + " km/h");
+        System.out.println("La mercedes après 10 secondes : " + mercedes.calculateSpeed(10) + " km/h");
     }
 }
 ```
@@ -659,15 +644,12 @@ Le mot-clé `extends` signifie *"hérite de"*, c’est-à-dire que les classes `
 
 **La liaison dynamique** est le mécanisme qui, à l’exécution, permet à Java de choisir la bonne méthode **override** à appeler, selon l’instance réelle. **L’override** signifie de redéfinir une méthode héritée d’une super-classe dans une sous-classe, pour changer son comportement. Autrement dit c'est réécrire une méthode existante pour qu’elle se comporte différemment dans la sous-classe.
 
-**Le polymorphisme** est un concept de la programmation orientée objet. Il signifie qu’un même nom peut représenter plusieurs comportements.
+**Le polymorphisme** est un concept de la programmation orientée objet. Il signifie qu’un même nom peut représenter plusieurs comportements :
 
 ```
-Vehicle Ferrari = new Car(1380, 570, 135);
-Vehicle Mercedes = new Truck(11700, 625, 4000);
+Vehicle ferrari = new Car(1380, 570);
+Vehicle mercedes = new Truck(11700, 625);
 ```
-
-- Le polymorphisme est le “pourquoi” : utiliser un objet selon son comportement réel.
-- La liaison dynamique est le “comment”.
 
 ## 8. Inner Class : les classes imbriquées
 

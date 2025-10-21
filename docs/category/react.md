@@ -6,7 +6,7 @@ sidebar_position: 4
 
 # React
 
-<span style={{color: "#9c96ff"}}>**React**</span> est une bibliothèque JavaScript utilisée pour construire des interfaces web, souvent associée à un framework qui enrichit ses fonctionnalités. Dans cette documentation, nous allons nous concentrer sur l’un des frameworks les plus populaires avec React : <span style={{color: "#9c96ff"}}>**Remix**</span>. Conçu pour développer des applications web full-stack, Remix permet de créer les interfaces avec des composants React, tout en offrant des fonctionnalités avancées et des optimisations de performance.
+<span style={{color: "#0f62fe"}}>**React**</span> est une bibliothèque JavaScript utilisée pour construire des interfaces web, souvent associée à un framework qui enrichit ses fonctionnalités. Dans cette documentation, nous allons nous concentrer sur l’un des frameworks les plus populaires avec React : <span style={{color: "#0f62fe"}}>**Remix**</span>. Conçu pour développer des applications web full-stack, Remix permet de créer les interfaces avec des composants React, tout en offrant des fonctionnalités avancées et des optimisations de performance.
 
 ### Préambule
 

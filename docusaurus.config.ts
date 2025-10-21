@@ -36,9 +36,13 @@ const config: Config = {
                 },
             ],
         },
+        colorMode: {
+            defaultMode: 'light',
+            disableSwitch: true,
+            respectPrefersColorScheme: false,
+        },
         prism: {
-            theme: prismThemes.github,
-            darkTheme: prismThemes.oceanicNext,
+            theme: prismThemes.vsLight,
         },
     } satisfies Preset.ThemeConfig,
 };

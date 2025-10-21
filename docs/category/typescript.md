@@ -6,7 +6,7 @@ sidebar_position: 3
 
 # TypeScript
 
-<span style={{color: "#9c96ff"}}>**TypeScript**</span> est un langage développé par Microsoft qui s’appuie sur JavaScript en l’enrichissant de nouvelles fonctionnalités. Il s’agit d’un sur-ensemble de JavaScript, ce qui signifie que tout code JavaScript valide peut être exécuté en TypeScript, mais l’inverse n’est pas vrai. 
+<span style={{color: "#0f62fe"}}>**TypeScript**</span> est un langage développé par Microsoft qui s’appuie sur JavaScript en l’enrichissant de nouvelles fonctionnalités. Il s’agit d’un sur-ensemble de JavaScript, ce qui signifie que tout code JavaScript valide peut être exécuté en TypeScript, mais l’inverse n’est pas vrai. 
 
 **La particularité de TypeScript réside dans son système de typage statique** : là où JavaScript attribue les types dynamiquement à l’exécution, TypeScript oblige ou permet de définir les types à l’avance, ce qui permet de détecter de nombreuses erreurs avant même que le programme ne s’exécute. 
 

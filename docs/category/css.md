@@ -6,7 +6,7 @@ sidebar_position: 6
 
 # CSS
 
-<span style={{color: "#9c96ff"}}>**Le CSS (Cascading Style Sheets)**</span> est un langage qui permet de définir l’apparence et la mise en page d’un document HTML. Alors que le HTML s’occupe de la structure et du contenu, le CSS vient préciser comment ces éléments doivent s’afficher : couleurs, tailles, marges, polices, alignements, positions, animations, etc. Grâce au CSS, on peut séparer le fond (le contenu) de la forme (la présentation), ce qui facilite la maintenance d’un site et permet d’obtenir des interfaces modernes, élégantes et adaptées à différents écrans (ordinateurs, tablettes, smartphones).
+<span style={{color: "#0f62fe"}}>**Le CSS (Cascading Style Sheets)**</span> est un langage qui permet de définir l’apparence et la mise en page d’un document HTML. Alors que le HTML s’occupe de la structure et du contenu, le CSS vient préciser comment ces éléments doivent s’afficher : couleurs, tailles, marges, polices, alignements, positions, animations, etc. Grâce au CSS, on peut séparer le fond (le contenu) de la forme (la présentation), ce qui facilite la maintenance d’un site et permet d’obtenir des interfaces modernes, élégantes et adaptées à différents écrans (ordinateurs, tablettes, smartphones).
 
 Voici quelques tableaux illustrant les principales possibilités offertes par le CSS :
 

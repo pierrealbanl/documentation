@@ -6,7 +6,7 @@ sidebar_position: 5
 
 # Angular
 
-<span style={{color: "#9c96ff"}}>**Angular**</span> est un framework pour créer des applications web modernes, dynamiques et modulaires. Basé sur TypeScript, il facilite le développement d’interfaces utilisateur riches grâce à son architecture en composants, son système de liaison de données (data binding) et ses outils intégrés pour la gestion des formulaires, des services et du routage.
+<span style={{color: "#0f62fe"}}>**Angular**</span> est un framework pour créer des applications web modernes, dynamiques et modulaires. Basé sur TypeScript, il facilite le développement d’interfaces utilisateur riches grâce à son architecture en composants, son système de liaison de données (data binding) et ses outils intégrés pour la gestion des formulaires, des services et du routage.
 
 **Angular ou React ?**
 

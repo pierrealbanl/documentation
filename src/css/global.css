@@ -1,71 +1,143 @@
+/* This file is based on the design language defined by IBM in particular,
+ * its color palette described at: https://www.ibm.com/design/language/color.
+ * This documentation is provided for non-commercial purposes and
+ * without any direct or official involvement from IBM.
+ */
+
+/* Imports the IBM Plex Sans font for all text elements. */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap');
+
+/* Defines the main font for the documentation website. */
+body {
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+}
+
+/* Defines global variables that customize Docusaurus theme colors and layout. */
 :root {
-    --ifm-color-primary: #6c63ff;
-    --ifm-color-primary-dark: #554ed1;
-    --ifm-color-primary-darker: #433eaa;
-    --ifm-color-primary-light: #817aff;
-    --ifm-color-primary-lighter: #9c96ff;
-    --ifm-color-primary-lightest: #bdb8ff;
+    --ifm-navbar-height: 65px;
+    --ifm-navbar-item-padding-horizontal: 0px;
+    --ifm-navbar-item-padding-vertical: 0px;
+    --ifm-navbar-padding-horizontal: 0px;
+    --ifm-navbar-padding-vertical: 0px;
+    --ifm-navbar-sidebar-width: 0px;
 
-    --ifm-color-info: var(#3b82f6);
-    --ifm-color-success: #2ba16b;
-    --ifm-color-warning: #c88900;
-    --ifm-color-danger: #d05353;
+    --ifm-color-primary: #0f62fe;
+    --ifm-color-primary-dark: #0043ce;
+    --ifm-color-primary-darker: #002d9c;
+    --ifm-color-primary-light: #a6c8ff;
+    --ifm-color-primary-lighter: #d0e2ff;
+    --ifm-color-primary-lightest: #edf5ff;
 
-    --ifm-background-color: #fdfdfd;
-    --ifm-color-content: #202124;
-    --ifm-color-secondary: #5f6368;
+    --ifm-color-info: #0f62fe;
+    --ifm-color-success: #24a148;
+    --ifm-color-warning: #f1c21b;
+    --ifm-color-danger: #da1e28;
 
-    --ifm-code-background: #f5f5f7;
-    --ifm-code-color: #d63384;
+    --ifm-background-color: #ffffff;
+    --ifm-color-content: #262626;
+    --ifm-color-secondary: #6f6f6f;
 }
 
-html[data-theme='dark'] {
-    --ifm-color-primary: #9c96ff;
-    --ifm-color-primary-dark: #817aff;
-    --ifm-color-primary-darker: #6c63ff;
-    --ifm-color-primary-light: #bdb8ff;
-    --ifm-color-primary-lighter: #d6d3ff;
-    --ifm-color-primary-lightest: #ebeaff;
-
-    --ifm-color-info: var(#3b82f6);
-    --ifm-color-success: #2ba16b;
-    --ifm-color-warning: #d3a63c;
-    --ifm-color-danger: #e57373;
-
-    --ifm-background-color: #1e1e24;
-    --ifm-color-content: #e6e6e6;
-    --ifm-color-secondary: #b0b3b8;
-
-    --ifm-code-background: #2a2a33;
-    --ifm-code-color: #ff79c6;
+/* Defines the visual style for informational alerts. */
+.alert--info {
+    --ifm-alert-background-color: color-mix(in oklab, var(--ifm-background-color) 90%, var(--ifm-color-info));
+    --ifm-alert-border-color: color-mix(in oklab, var(--ifm-background-color) 90%, var(--ifm-color-info));
 }
 
+/* Defines the visual style for success alerts. */
+.alert--success {
+    --ifm-alert-background-color: color-mix(in oklab, var(--ifm-background-color) 90%, var(--ifm-color-success));
+    --ifm-alert-border-color: color-mix(in oklab, var(--ifm-background-color) 90%, var(--ifm-color-success));
+}
+
+/* Defines the visual style for warning alerts. */
+.alert--warning {
+    --ifm-alert-background-color: color-mix(in oklab, var(--ifm-background-color) 90%, var(--ifm-color-warning));
+    --ifm-alert-border-color: color-mix(in oklab, var(--ifm-background-color) 90%, var(--ifm-color-warning));
+}
+
+/* Defines the visual style for danger alerts. */
+.alert--danger {
+    --ifm-alert-background-color: color-mix(in oklab, var(--ifm-background-color) 90%, var(--ifm-color-danger));
+    --ifm-alert-border-color: color-mix(in oklab, var(--ifm-background-color) 90%, var(--ifm-color-danger));
+}
+
+/* Defines the general background and text color of the navigation bar. */
 .navbar {
-    background-color: var(--ifm-background-color);
-    color: var(--ifm-color-content);
+    background-color: #161616;
+    color: #ffffff;
+    height: 50px;
+    align-items: center;
 }
 
-.alert {
-    --ifm-alert-foreground-color: var(--ifm-color-content);
+/* Defines the color of navbar links. */
+.navbar__link {
+    color: #ffffff;
+}
+
+/* Defines the color of navbar links when hovered. */
+.navbar__link:hover {
+    color: #ffffff;
+}
+
+/* Defines the style of the sidebar container on documentation pages. */
+.theme-doc-sidebar-container {
+    --doc-sidebar-width: 280px;
+    background: #ffffff;
     box-shadow: none;
 }
 
-.alert--info {
-    --ifm-alert-background-color: color-mix(in oklab, var(--ifm-background-color) 90%, var(--ifm-color-info));
-    --ifm-alert-border-color: color-mix(in oklab, var(--ifm-background-color) 70%, var(--ifm-color-info));
+/* Removes default margin from sidebar items. */
+.theme-doc-sidebar-menu .menu__list-item {
+    margin: 0px;
 }
 
-.alert--success {
-    --ifm-alert-background-color: color-mix(in oklab, var(--ifm-background-color) 90%, var(--ifm-color-success));
-    --ifm-alert-border-color: color-mix(in oklab, var(--ifm-background-color) 70%, var(--ifm-color-success));
+/* Defines general link styles inside the sidebar menu. */
+.menu__link {
+    color: #161616;
+    font-weight: 500;
+    font-size: 15px;
+    padding: 10px 17px;
 }
 
-.alert--warning {
-    --ifm-alert-background-color: color-mix(in oklab, var(--ifm-background-color) 90%, var(--ifm-color-warning));
-    --ifm-alert-border-color: color-mix(in oklab, var(--ifm-background-color) 70%, var(--ifm-color-warning));
+/* Removes border-radius and shadows from various menu and navbar elements. */
+.menu__link,
+.menu__list-item,
+.navbar,
+.dropdown__link,
+.navbar__dropdown {
+    border-radius: 0;
+    box-shadow: none;
 }
 
-.alert--danger {
-    --ifm-alert-background-color: color-mix(in oklab, var(--ifm-background-color) 90%, var(--ifm-color-danger));
-    --ifm-alert-border-color: color-mix(in oklab, var(--ifm-background-color) 70%, var(--ifm-color-danger));
+/* Highlights the active menu item with a blue left border. */
+.menu__link--active {
+    border-left: 3px solid #0f62fe;
+}
+
+
+/* Defines the appearance of collapsible section titles in the sidebar. */
+.menu__list-item-collapsible > .menu__link {
+    border-left: 0px;
+    color: #161616;
+    font-weight: 600;
+}
+
+/* Removes background color from collapsible menu items. */
+.menu__list-item-collapsible {
+    background: none !important;
+}
+
+/* Defines the color and weight for nested (child) menu items. */
+.menu__list .menu__list .menu__link {
+    color: #525252;
+    font-weight: 400;
+}
+
+/* Adjusts sidebar padding behavior for desktop screen sizes. */
+@media (min-width: 997px) {
+    .menu_SIkG {
+        padding: 0 !important;
+        scrollbar-gutter: auto !important;
+    }
 }
