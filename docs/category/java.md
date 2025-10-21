@@ -139,12 +139,78 @@ public class Main {
 }
 ```
 
-## 3. Différence entre une variable locale et une variable d'instance (propriété)
+## 3. Classe fondamentale de Java : `String`
+
+`String` est une classe du package `java.lang` utilisée pour représenter des chaînes de caractères. En Java, une chaîne de caractères est un objet de type String, et non un simple tableau de caractères.
+
+```
+String s = "Hello World!";
+```
+
+| **Méthode d’instance**            | **Description**                                                                                              |
+|:----------------------------------|:-------------------------------------------------------------------------------------------------------------|
+| `length()`                        | Renvoie la **longueur** d’une chaîne de caractères (nombre total de caractères).                             |
+| `charAt(int i)`                   | Retourne le **caractère** situé à la position indiquée dans une chaîne de caractères (l’index commence à 0). |
+| `substring(int i, int j)`         | Extrait une **sous-chaîne de caractères** comprise entre les indices `start` (inclus) et `end` (exclu).      |
+| `equals(Object obj)`              | Compare **le contenu** de deux chaînes de caractères et retourne `true` si elles sont identiques.            |
+| `toUpperCase()` / `toLowerCase()` | Convertit une chaîne de caractères en **majuscules** ou en **minuscules**.                                   |
+| `compareTo(String s)`             | Compare deux chaînes de caractères selon l’**ordre alphabétique** (résultat négatif, nul ou positif).        |
+| `concat(String s)`                | Concatène une chaîne de caractères avec une autre et renvoie le **résultat combiné**.                        |
+
+```
+public class Main {
+    public static void main(String[] args) {
+        String s = "Hello World";
+
+        System.out.println(s.length());
+        System.out.println(s.charAt(3));
+        System.out.println(s.substring(0, 5));
+        System.out.println(s.toUpperCase());
+        System.out.println(s.compareTo("Hello Bob!"));
+        System.out.println(s.concat("!"));
+    }
+}
+```
+
+## 4. Les tableaux
+
+**Un tableau** est une structure de données permettant de stocker plusieurs valeurs du même type dans une seule variable. Chaque valeur est accessible grâce à un indice numérique, qui commence toujours à 0.
+
+Il existe deux manières principales de créer un tableau :
+
+```
+public class Main {
+    public static void main(String[] args) {
+        int[] n = new int[3];
+        n[0] = 10;
+        n[1] = 15;
+        n[2] = 20;
+
+        for (int i = 0; i < n.length; i++) {
+            System.out.println(n[i]);
+        }
+    }
+}
+```
+
+```
+public class Main {
+    public static void main(String[] args) {
+        int[] n = {10, 15, 20};
+
+        for (int i = 0; i < n.length; i++) {
+            System.out.println(n[i]);
+        }
+    }
+}
+```
+
+## 5. Différence entre une variable locale et une variable d'instance (propriété)
 
 Une **variable locale** représente un espace mémoire nommé servant à stocker 
 une valeur, tandis qu’une **variable d'instance (propriété)** correspond à une variable attachée à un objet ou à une classe. Contrairement aux variables, les propriétés doivent **obligatoirement être déclarées au sein d’une classe.**
 
-### 3.1. Variable locale
+### 5.1. Variable locale
 
 Une **variable locale est déclarée à l’intérieur d’une méthode**, d’un constructeur ou d’un bloc (`if`, `for`, etc.).
 
@@ -157,7 +223,7 @@ public class Main {
 }
 ```
 
-### 3.2. Variable d'instance
+### 5.2. Variable d'instance
 
 Une **variable d'instance est déclarée dans une classe**, en dehors de toute méthode.
 
@@ -176,11 +242,11 @@ public class Main {
 }
 ```
 
-## 4. Modificateurs d’accès
+## 6. Modificateurs d’accès
 
 **Les modificateurs d’accès** permettent de contrôler qui peut accéder à une classe, une méthode, une propriété ou un constructeur. Ils jouent un rôle essentiel pour organiser le code, protéger les données sensibles et structurer la visibilité entre les différentes parties d’un programme. 
 
-### 4.1. Pour les classes : `public`
+### 6.1. Pour les classes : `public`
 
 | **Modificateur**  | **Description**                                                |
 |:------------------|:---------------------------------------------------------------|
@@ -228,7 +294,7 @@ public class Main {
 }
 ```
 
-### 4.2. Pour les propriétés, méthodes et constructeurs : `public`, `private` et `protected`
+### 6.2. Pour les propriétés, méthodes et constructeurs : `public`, `private` et `protected`
 
 | **Modificateur**  | **Description**                                      |
 |:------------------|:-----------------------------------------------------|
@@ -386,9 +452,9 @@ public class Main {
 }
 ```
 
-## 5. Modificateurs non liés à l'accès
+## 7. Modificateurs non liés à l'accès
 
-### 5.1. Pour les classes : `final` et `abstract`
+### 7.1. Pour les classes : `final` et `abstract`
 
 | **Modificateur** | **Description**                                       |
 |:-----------------|:------------------------------------------------------|
@@ -436,7 +502,7 @@ public class Main {
 ```
 :::
 
-### 5.2. Pour les propriétés et méthodes : `final`, `abstract` et `static`
+### 7.2. Pour les propriétés et méthodes : `final`, `abstract` et `static`
 
 | **Modificateur** | **Description**                                                                                                                                                                   |
 |:-----------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -538,7 +604,7 @@ public class Main {
 Même si on écrit `ferrari.category = "A2";`, la valeur changera aussi pour l’objet `lamborghini`. En effet, une propriété `static` est partagée par tous les objets de la classe : elle n’appartient pas à une instance, mais à la classe elle-même.
 :::
 
-## 6. JavaBean : modèle d'encapsulation pour structurer de données
+## 8. JavaBean : modèle d'encapsulation pour structurer de données
 
 **L'encapsulation** est une règle essentielle en programmation orientée objet. Elle consiste à protéger les données internes d’un objet en les rendant inaccessibles directement depuis l’extérieur.
 
@@ -582,7 +648,7 @@ public class Main {
 }
 ```
 
-## 7. Héritage, liaison dynamique et polymorphisme
+## 9. Héritage, liaison dynamique et polymorphisme
 
 ```
 public class Vehicle {
@@ -651,7 +717,99 @@ Vehicle ferrari = new Car(1380, 570);
 Vehicle mercedes = new Truck(11700, 625);
 ```
 
-## 8. Inner Class : les classes imbriquées
+## 10. Les structures de données
+
+Les structures de données servent à stocker et organiser les informations de façon à les rendre plus faciles et rapides à exploiter. Par exemple, un tableau est une structure de données qui permet de regrouper plusieurs éléments au sein d’une même variable.
+
+Le langage Java propose de nombreuses autres structures de données dans le package `java.util`, chacune adaptée à un type de traitement ou de manipulation spécifique des données.
+
+### 10.1. `ArrayList`
+
+`ArrayList` est une classe qui représente une liste dynamique d’éléments (comme un tableau, mais qui peut changer de taille). Les principales méthodes disponibles pour manipuler une `ArrayList` sont : `add`, `get`, `set`, `size`, `remove` et `clear` :
+
+```
+import java.util.ArrayList;
+
+public class Main {
+    public static void main(String[] args) {
+        ArrayList<String> Vehicle = new ArrayList<String>();
+
+        Vehicle.add("Ferrari");
+        Vehicle.add("Lamborghini");
+        Vehicle.add("Mercedes");
+        System.out.println("Les véhicules disponibles dans la liste : " + Vehicle);
+
+        System.out.println(Vehicle.get(0));
+
+        Vehicle.set(2, "Audi");
+        System.out.println("Les véhicules disponibles dans la liste : " + Vehicle);
+
+        System.out.println("La taille de la liste est " + Vehicle.size());
+
+        Vehicle.remove(1);
+        Vehicle.remove(1);
+        System.out.println("Les véhicules disponibles dans la liste : " + Vehicle);
+
+        Vehicle.clear();
+        System.out.println("Les véhicules disponibles dans la liste : " + Vehicle);
+    }
+}
+```
+
+Par ailleurs, la classe `Collections` propose la méthode `sort()` qui permet de trier une `ArrayList` en ordre alphabétique ou numérique.
+
+
+```
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Main {
+    public static void main(String[] args) {
+        ArrayList<String> Vehicle = new ArrayList<String>();
+
+        Vehicle.add("Ferrari");
+        Vehicle.add("Lamborghini");
+        Vehicle.add("Mercedes");
+
+        Collections.sort(Vehicle);
+        for (String i : Vehicle) {
+            System.out.println(i);
+        }
+    }
+}
+```
+
+###  10.2. `HashSet`
+
+```
+import java.util.HashSet;
+
+public class Main {
+    public static void main(String[] args) {
+        HashSet<String> Vehicle = new HashSet<String>();
+
+        Vehicle.add("Ferrari");
+        Vehicle.add("Lamborghini");
+        Vehicle.add("Mercedes");
+        System.out.println("Les véhicules disponibles dans la liste : " + Vehicle);
+
+        System.out.println(Vehicle.contains("Mercedes"));
+
+        System.out.println("La taille de la liste est " + Vehicle.size());
+
+        Vehicle.remove("Mercedes");
+        Vehicle.remove("Lamborghini");
+        System.out.println("Les véhicules disponibles dans la liste : " + Vehicle);
+
+        Vehicle.clear();
+        System.out.println("Les véhicules disponibles dans la liste : " + Vehicle);
+    }
+}
+```
+
+## 11. Les interfaces intégrées : `List`, `Map`, `Set`, `Comparable`, `Runnable`
+
+## 12. Inner Class : les classes imbriquées
 
 En Java, on peut déclarer une classe à l'intérieur d'une autre classe. Cela s'appelle une **classe imbriquée**. Ce mécanisme sert à organiser le code : on regroupe des classes qui sont étroitement liées, ce qui rend le programme plus clair et plus facile à entretenir.
 
@@ -677,7 +835,7 @@ public class Main {
 }
 ```
 
-### 8.1. Classe interne statique
+### 12.1. Classe interne statique
 
 Une classe interne peut également être déclarée comme `static`, ce qui permet d'y accéder sans avoir besoin de créer une instance de la classe externe :
 
@@ -700,7 +858,7 @@ public class Main {
 }
 ```
 
-### 8.2. Accéder à la classe externe depuis une classe interne
+### 12.2. Accéder à la classe externe depuis une classe interne
 
 L’un des principaux avantages des classes internes est leur capacité à accéder directement aux propriétés et méthodes de leur classe externe :
 
@@ -725,12 +883,3 @@ public class Main {
    }
 }
 ```
-
-## 9. Types de référence
-
-| **Type de référence** | **Exemples**                                                                                                                                                                                                                                                                                                                                                                                                                      | **Description**                                                                                                                                      |
-|:----------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Classes**           | **java.lang :** `String`, `Object`, `Math`, `System`, classes Wrapper <br/> **java.util :** `ArrayList`, `HashMap`, `HashSet`, `Scanner` <br/> **java.time :** `LocalDate`, `LocalTime`, `LocalDateTime` <br/> **java.io / java.nio :** `File`, `InputStream`, `OutputStream` <br/> **Exceptions :** `Exception`, `NullPointerException`, `IllegalArgumentException` <br/> **Utilisateurs :** classes définies par le programmeur | Définissent des **objets** avec propriétés et méthodes. Forment la base de la programmation orientée objet.                                          |
-| **Interfaces**        | `List`, `Map`, `Set`, `Comparable`, `Runnable`                                                                                                                                                                                                                                                                                                                                                                                    | Définissent un **contrat** (méthodes abstraites). Les classes qui les implémentent doivent fournir une implémentation. Favorisent le polymorphisme.  |
-| **Tableaux**          | `int[]`, `String[]`, `Integer[]`                                                                                                                                                                                                                                                                                                                                                                                                  | Structures permettant de stocker plusieurs valeurs d’un **même type**. Taille fixe, accès par indice.                                                |
-| **Enums**             | `DayOfWeek`, `Month` (ou enums personnalisés)                                                                                                                                                                                                                                                                                                                                                                                     | Types spéciaux représentant un **ensemble fini** de constantes (ex. jours, mois, états).                                                             |

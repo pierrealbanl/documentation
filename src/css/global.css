@@ -36,8 +36,8 @@ body {
     --ifm-color-danger: #da1e28;
 
     --ifm-background-color: #ffffff;
-    --ifm-color-content: #262626;
-    --ifm-color-secondary: #6f6f6f;
+    --ifm-color-content: #343a3f;
+    --ifm-color-secondary: #878d96;
 }
 
 /* Defines the visual style for informational alerts. */
@@ -70,27 +70,27 @@ body {
 
 /* Defines the general background and text color of the navigation bar. */
 .navbar {
-    background-color: #161616;
-    color: #ffffff;
+    background-color: #ffffff;
     height: 50px;
     align-items: center;
+    border-bottom: 1px solid #e0e0e0;
 }
 
 /* Defines the color of navbar links. */
 .navbar__link {
     font-weight: 400;
-    color: #ffffff;
+    color: #161616;
 }
 
 /* Defines the color of navbar links when hovered. */
 .navbar__link:hover {
-    color: #ffffff;
+    color: #161616;
 }
 
 /* Defines the style of the sidebar container on documentation pages. */
 .theme-doc-sidebar-container {
     --doc-sidebar-width: 280px;
-    background: #ffffff;
+    background: #f4f4f4;
     box-shadow: none;
 }
 
@@ -104,7 +104,12 @@ body {
     color: #525252;
     font-weight: 600;
     font-size: 14px;
-    padding: 10px 17px;
+    padding: 7px 17px;
+}
+
+/* Highlights the active menu item with a blue left border. */
+.menu__link--active {
+    border-left: 4px solid #0f62fe;
 }
 
 /* Removes border-radius and shadows from various menu and navbar elements. */
@@ -115,11 +120,6 @@ body {
 .navbar__dropdown {
     border-radius: 0;
     box-shadow: none;
-}
-
-/* Highlights the active menu item with a blue left border. */
-.menu__link--active {
-    border-left: 3px solid #0f62fe;
 }
 
 /* Defines the appearance of collapsible section titles in the sidebar. */

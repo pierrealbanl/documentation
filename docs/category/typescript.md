@@ -210,7 +210,9 @@ function main(): void {
 main();
 ```
 
+:::info
 Comme évoqué dans le préambule, il est recommandé de consulter la documentation Java pour bien comprendre le fonctionnement des classes. Cette documentation TypeScript **n’aborde pas en détail la programmation orientée objet.**
+:::
 
 ## 5. Types génériques
 
