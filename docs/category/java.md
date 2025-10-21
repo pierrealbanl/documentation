@@ -165,6 +165,7 @@ public class Main {
         System.out.println(s.length());
         System.out.println(s.charAt(3));
         System.out.println(s.substring(0, 5));
+        System.out.println(s.equals("hello world"));
         System.out.println(s.toUpperCase());
         System.out.println(s.compareTo("Hello Bob!"));
         System.out.println(s.concat("!"));
