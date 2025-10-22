@@ -32,7 +32,7 @@ const config: Config = {
                     type: 'doc',
                     docId: 'intro',
                     position: 'left',
-                    label: 'Documentation',
+                    label: 'Documentation'
                 },
             ],
         },

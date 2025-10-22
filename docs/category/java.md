@@ -726,7 +726,14 @@ Les structures de données servent à stocker et organiser les informations de f
 
 Le langage Java propose de nombreuses autres structures de données dans le package `java.util`, chacune adaptée à un type de traitement ou de manipulation spécifique des données.
 
-### 10.1. `ArrayList`
+| Classe       | Particularités                                                 | Doublons autorisés  | Ordre conservé | Accès rapide             |
+| :----------- | :------------------------------------------------------------- |:--------------------|:---------------|:-------------------------|
+| `ArrayList`  | Tableau redimensionnable, accès par index                      | Oui                 | Oui            | Oui                      |
+| `HashSet`    | Éléments uniques, non ordonnés                                 | Non                 | Non            | Oui                      |
+| `LinkedList` | Éléments reliés entre eux (chaque nœud pointe vers le suivant) | Oui                 | Oui            | Non (parcours séquentiel)|
+| `HashMap`    | Chaque clé est unique et associée à une valeur                 | Non (pour les clés) | Non            | Oui (par clé)            |
+
+### 10.1. Liste dynamique ordonnée : `ArrayList`
 
 `ArrayList` est une classe qui représente une liste dynamique d’éléments (comme un tableau, mais qui peut changer de taille). Les principales méthodes disponibles pour manipuler une `ArrayList` sont : `add`, `get`, `set`, `size`, `remove` et `clear` :
 
@@ -768,44 +775,124 @@ import java.util.Collections;
 
 public class Main {
     public static void main(String[] args) {
-        ArrayList<String> Vehicle = new ArrayList<String>();
+        ArrayList<String> vehicle = new ArrayList<String>();
 
-        Vehicle.add("Ferrari");
-        Vehicle.add("Lamborghini");
-        Vehicle.add("Mercedes");
+        vehicle.add("Ferrari");
+        vehicle.add("Lamborghini");
+        vehicle.add("Mercedes");
 
-        Collections.sort(Vehicle);
-        for (String i : Vehicle) {
-            System.out.println(i);
-        }
+        Collections.sort(vehicle);
+        System.out.println("Les véhicules disponibles dans la liste après le tri : " + vehicle);
     }
 }
 ```
 
-###  10.2. `HashSet`
+###  10.2. Ensemble non ordonné d’éléments uniques : `HashSet`
+
+La classe `HashSet` est une structure de données qui permet de stocker une collection d’éléments uniques, sans ordre particulier. Contrairement à une `ArrayList`, un `HashSet` ne conserve pas l’ordre d’insertion et n’autorise pas les doublons. 
+
+Les principales méthodes disponibles pour manipuler un `HashSet` sont : `add`, `contains`, `size`, `remove` et `clear` :
 
 ```
 import java.util.HashSet;
 
 public class Main {
     public static void main(String[] args) {
-        HashSet<String> Vehicle = new HashSet<String>();
+        HashSet<String> vehicle = new HashSet<String>();
 
-        Vehicle.add("Ferrari");
-        Vehicle.add("Lamborghini");
-        Vehicle.add("Mercedes");
-        System.out.println("Les véhicules disponibles dans la liste : " + Vehicle);
+        vehicle.add("Ferrari");
+        vehicle.add("Ferrari"); // Impossible d’ajouter un doublon
+        vehicle.add("Lamborghini");
+        vehicle.add("Mercedes");
+        System.out.println("Les véhicules disponibles dans la liste : " + vehicle);
 
-        System.out.println(Vehicle.contains("Mercedes"));
+        System.out.println(vehicle.contains("Mercedes"));
 
-        System.out.println("La taille de la liste est " + Vehicle.size());
+        System.out.println("La taille de la liste est " + vehicle.size());
 
-        Vehicle.remove("Mercedes");
-        Vehicle.remove("Lamborghini");
-        System.out.println("Les véhicules disponibles dans la liste : " + Vehicle);
+        vehicle.remove("Mercedes");
+        vehicle.remove("Lamborghini");
+        System.out.println("Les véhicules disponibles dans la liste : " + vehicle);
 
-        Vehicle.clear();
-        System.out.println("Les véhicules disponibles dans la liste : " + Vehicle);
+        vehicle.clear();
+        System.out.println("Les véhicules disponibles dans la liste : " + vehicle);
+    }
+}
+```
+
+### 10.3. Liste chaînée dynamique : `LinkedList`
+
+La classe `LinkedList` est une structure de données qui représente une liste chaînée. Une liste chaînée est une façon différente de stocker plusieurs éléments les uns à la suite des autres : elle est constituée d’une succession de nœuds reliés entre eux, où chaque élément pointe vers le suivant et le précédent.
+
+Contrairement à une `ArrayList`, qui repose sur un tableau dynamique, une `LinkedList` facilite les insertions et suppressions fréquentes d’éléments, notamment au début ou au milieu de la liste. En revanche, l’accès direct à un élément par son index est plus lent, car il faut parcourir la chaîne maillon par maillon.
+
+Les principales méthodes disponibles pour manipuler une `LinkedList` sont : `add`, `get`, `set`, `contains`, `size`, `sort`, `remove` et `clear` :
+
+```
+import java.util.Collections;
+import java.util.LinkedList;
+
+public class Main {
+    public static void main(String[] args) {
+        LinkedList<String> vehicle = new LinkedList<String>();
+
+        vehicle.add("Ferrari");
+        vehicle.add("Lamborghini");
+        vehicle.add("Mercedes");
+
+        System.out.println(vehicle.get(0));
+
+        vehicle.set(2, "Audi");
+        System.out.println("Les véhicules disponibles dans la liste : " + vehicle);
+
+        System.out.println(vehicle.contains("Mercedes"));
+
+        System.out.println("La taille de la liste est " + vehicle.size());
+
+        Collections.sort(vehicle);
+        System.out.println("Les véhicules disponibles dans la liste après le tri : " + vehicle);
+
+        vehicle.remove("Audi");
+        vehicle.remove("Lamborghini");
+        System.out.println("Les véhicules disponibles dans la liste : " + vehicle);
+
+        vehicle.clear();
+        System.out.println("Les véhicules disponibles dans la liste : " + vehicle);
+    }
+}
+```
+
+### 10.4. Table de correspondance : `HashMap`
+
+La classe `HashMap` est une structure de données qui permet de stocker des paires clé/valeur. Chaque clé est unique et associée à une valeur correspondante. Cette structure fonctionne comme un dictionnaire : elle permet de retrouver rapidement une valeur à partir de sa clé, sans avoir à parcourir toute la collection. En revanche, l’ordre d’insertion des éléments n’est pas conservé.
+
+Les principales méthodes disponibles pour manipuler un `HashMap` sont : `put`, `get`, `containsKey`, `containsValue`, `remove`, `size` et `clear` :
+
+```
+import java.util.HashMap;
+
+public class Main {
+    public static void main(String[] args) {
+        HashMap<String, Integer> vehicle = new HashMap<String, Integer>();
+
+        vehicle.put("Ferrari", 570);
+        vehicle.put("Lamborghini", 740);
+        vehicle.put("Mercedes", 625);
+        System.out.println("Les véhicules disponibles dans la liste : " + vehicle);
+
+        System.out.println(vehicle.get("Ferrari"));
+
+        System.out.println(vehicle.containsKey("Ferrari"));
+        System.out.println(vehicle.containsValue(570));
+
+        System.out.println("La taille de la liste est " + vehicle.size());
+
+        vehicle.remove("Mercedes");
+        vehicle.remove("Lamborghini");
+        System.out.println("Les véhicules disponibles dans la liste : " + vehicle);
+
+        vehicle.clear();
+        System.out.println("Les véhicules disponibles dans la liste : " + vehicle);
     }
 }
 ```

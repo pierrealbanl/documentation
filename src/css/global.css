@@ -30,7 +30,7 @@ body {
     --ifm-color-primary-lighter: #d0e2ff;
     --ifm-color-primary-lightest: #edf5ff;
 
-    --ifm-color-info: #0f62fe;
+    --ifm-color-info: #edf5ff;
     --ifm-color-success: #24a148;
     --ifm-color-warning: #f1c21b;
     --ifm-color-danger: #da1e28;
@@ -42,8 +42,8 @@ body {
 
 /* Defines the visual style for informational alerts. */
 .alert--info {
-    --ifm-alert-background-color: color-mix(in oklab, var(--ifm-background-color) 90%, var(--ifm-color-info));
-    --ifm-alert-border-color: color-mix(in oklab, var(--ifm-background-color) 90%, var(--ifm-color-info));
+    --ifm-alert-background-color: var(--ifm-color-info);
+    --ifm-alert-border-color: var(--ifm-color-info);
     border-radius: 0;
 }
 
@@ -90,7 +90,7 @@ body {
 /* Defines the style of the sidebar container on documentation pages. */
 .theme-doc-sidebar-container {
     --doc-sidebar-width: 280px;
-    background: #f4f4f4;
+    background: #ffffff;
     box-shadow: none;
 }
 
@@ -102,8 +102,8 @@ body {
 /* Defines general link styles inside the sidebar menu. */
 .menu__link {
     color: #525252;
-    font-weight: 600;
-    font-size: 14px;
+    font-weight: 400;
+    font-size: 15px;
     padding: 7px 17px;
 }
 
@@ -126,7 +126,7 @@ body {
 .menu__list-item-collapsible > .menu__link {
     border-left: 0px;
     color: #525252;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 /* Removes background color from collapsible menu items. */
@@ -146,4 +146,16 @@ body {
         padding: 0 !important;
         scrollbar-gutter: auto !important;
     }
+}
+
+.pagination-nav__sublabel {
+    color: #343a3f;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.pagination-nav__label {
+    color: #0f62fe;
+    font-size: 15px;
+    font-weight: 500;
 }
