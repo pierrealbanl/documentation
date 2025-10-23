@@ -43,6 +43,7 @@ const config: Config = {
         },
         prism: {
             theme: prismThemes.vsLight,
+            additionalLanguages: ['java']
         },
     } satisfies Preset.ThemeConfig,
 };
