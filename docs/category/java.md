@@ -19,9 +19,9 @@ La portabilité en Java signifie que le code source est compilé en bytecode, un
 
 ## 1. Les classes et objets
 
-**Une classe** est un modèle ou un plan qui décrit **les caractéristiques et les comportements** que posséderont les objets créés à partir d’elle.
+**Un objet** est une structure de données dynamique qui regroupe des **valeurs nommées appelées propriétés** et des **fonctions appelées  méthodes**, exactement comme une structure en C, mais en plus puissant, car on peut y **stocker des valeurs et des comportements**.
 
-**Un objet** est une structure de données dynamique qui regroupe des **valeurs nommées appelées propriétés** et des **fonctions appelées méthodes**, exactement comme une structure en C, mais en plus puissant, car on peut y **stocker des valeurs et des comportements** :
+**Une classe** est un modèle ou un plan qui décrit **les caractéristiques et les comportements** que posséderont les objets créés à partir d’elle.
 
 :::info
 Dans l’exemple qui suit, ne pas tenir compte des mots `public` et `static` et ni des types. L’important est de se concentrer uniquement sur les explications relatives aux propriétés, aux méthodes et au constructeur.
@@ -54,19 +54,131 @@ public class Main {
 
 `ferrari` est une variable qui référence un objet, autrement dit une **instance** de la classe `Vehicle`. Lorsque l’on parle d’instance, on fait référence à l’objet complet en mémoire, c’est-à-dire à une structure qui regroupe des propriétés et des méthodes :
 
-- **des propriétés** `weight` et `enginePower`, qui **stockent les données** associées à l’utilisateur.
-- **des méthodes** `calculateSpeed(...)`, qui **définit une action** que l’objet peut effectuer.
-- **Le constructeur** `public Vehicle(double weight, double enginePower) {...}` est une méthode spéciale utilisée pour créer une nouvelle instance (ou objet) de type `Vehicle`. Il sert à initialiser les propriétés de l'objet  (`weight` et `enginePower`) avec les valeurs fournies en paramètre, comme dans l’exemple `new Vehicle(1380, 570);`. Ainsi, dès sa création, l’objet contient déjà les informations de l’utilisateur.
-
 > **Une instance** désigne le fait que cet objet a été créé à partir d'un modèle (une classe).
 
-## 2. Types primitifs et classes Wrapper
+**Les propriétés** `weight` et `enginePower`, qui **stockent des données**.
 
-En Java, un type définit la nature d’une donnée, les valeurs qu’elle peut prendre et les opérations qu’on peut lui appliquer. On distingue les **types primitifs**, qui stockent directement des valeurs en mémoire, et les **classes wrapper**, qui stockent des adresses pointant vers des objets. 
+**Les méthodes** `calculateSpeed(...)`, **définit une action** que l’objet peut effectuer.
+
+**Le constructeur** `Vehicle(double weight, double enginePower) {...}` est une méthode spéciale utilisée pour créer une nouvelle instance (ou objet) de type `Vehicle`. Il sert à initialiser les propriétés de l'objet  (`weight` et `enginePower`) avec les valeurs fournies en paramètre, comme dans l’exemple `new Vehicle(1380, 570);`. Ainsi, dès sa création, l’objet contient déjà les informations de l’utilisateur.
+
+
+## 2. Le polymorphisme : héritage, liaison dynamique et overloading
+
+```
+class Vehicle {
+    double weight;
+    double enginePower;
+
+    Vehicle(double weight, double enginePower) {
+        this.weight = weight;
+        this.enginePower = enginePower;
+    }
+
+    double calculateSpeed(float seconds) {
+        return (enginePower / weight) * seconds;
+    }
+}
+
+class Car extends Vehicle {
+    Car (double weight, double enginePower) {
+        super(weight, enginePower);
+    }
+
+    double calculateSpeed(float seconds) {
+        return super.calculateSpeed(seconds);
+    }
+}
+
+class Truck extends Vehicle {
+    Truck (double weight, double enginePower) {
+        super(weight, enginePower);
+    }
+
+    double calculateSpeed(float seconds) {
+        return super.calculateSpeed(seconds);
+    }
+}
+```
+
+```
+public class Main {
+    public static void main(String[] args) {
+        Vehicle ferrari = new Car(1380, 570);
+        Vehicle mercedes = new Truck(11700, 625);
+
+        System.out.println("La ferrari après 10 secondes : " + ferrari.calculateSpeed(10) + " km/h");
+        System.out.println("La mercedes après 10 secondes : " + mercedes.calculateSpeed(10) + " km/h");
+    }
+}
+```
+
+**L'héritage** permet à une sous-classe de réutiliser les propriétés et méthodes d'une super-classe :
+
+```
+class Car extends Vehicle {...}
+
+class Truck extends Vehicle {...}
+```
+
+Le mot-clé `extends` signifie *"hérite de"*, c’est-à-dire que les classes `Car`et `Truck` héritent des propriétés et méthodes de la super-classe `Vehicle`. Autrement dit les classes `Car` et `Truck` sont des sous-classes de la super-classe `Vehicle`.
+
+**La liaison dynamique** est un mécanisme qui détermine quelle méthode redéfinie (overriding) doit être exécutée au moment de l’exécution, selon le type réel de l’objet référencé. Elle permet d’appeler la bonne méthode même si la variable est de type parent, mais que l’objet réel appartient à une sous-classe.
 
 :::info
-*D'autres types, comme les types de référence, seront expliqués en détail plus loin, dans la partie 9 de cette documentation.*
+**L’overriding** est un mécanisme qui permet à une sous-classe de fournir sa propre implémentation d’une méthode déjà définie dans la classe parente. La méthode redéfinie doit avoir **le même nom, les mêmes paramètres et le même type de retour** que celle du parent.
+
+La classe `Vehicle` définit :
+```
+double calculateSpeed(float seconds) { ... }
+```
+
+Dans les sous-classes `Car` et `Truck`, la même méthode est redéfinie :
+
+```
+double calculateSpeed(float seconds) {
+    return super.calculateSpeed(seconds);
+}
+```
 :::
+
+**L’overloading** est un mécanisme qui détermine quelle méthode appeler en fonction des paramètres passés. Il permet de définir plusieurs méthodes avec le même nom, mais avec des paramètres différents. Ce choix est fait au moment de la compilation, ce qui permet au compilateur de savoir exactement quelle version de la méthode exécuter.
+
+```
+class Vehicle {
+    double weight;
+    double enginePower;
+
+    Vehicle(double weight, double enginePower) {
+        this.weight = weight;
+        this.enginePower = enginePower;
+    }
+
+    double calculateSpeed(float seconds) {
+        return (enginePower / weight) * seconds;
+    }
+
+    double calculateSpeed(float seconds, double traction) {
+        return (enginePower / weight) * seconds * traction;
+    }
+}
+```
+
+```
+public class Main {
+    public static void main(String[] args) {
+        Vehicle ferrari = new Vehicle(1380, 570);
+
+        System.out.println("La ferrari avec adhérence après 10 secondes : " + ferrari.calculateSpeed(10, 0.9) + " km/h");
+    }
+}
+```
+
+**Le polymorphisme** est le concept global qui dit qu’un même objet peut avoir plusieurs comportements différents selon le contexte. Il est rendu possible grâce à la combinaison de l’overloading (polymorphisme statique) et de la liaison dynamique (polymorphisme dynamique).
+
+## 3. Types primitifs vs classes Wrapper
+
+En Java, un type définit la nature d’une donnée, les valeurs qu’elle peut prendre et les opérations qu’on peut lui appliquer. On distingue les **types primitifs**, qui stockent directement des valeurs en mémoire, et les **classes wrapper**, qui stockent des adresses pointant vers des objets.
 
 | **Type primitif** | **Taille (bits)** | **Classe wrapper** | **Description**                                            |
 | :---------------- | :---------------- | :----------------- | :--------------------------------------------------------- |
@@ -84,7 +196,7 @@ Les **types primitifs** ne sont pas des objets, ce qui signifie qu’ils ne poss
 Petite particularité : `void` n’est pas un type de valeur utilisable pour des variables. Il s’emploie uniquement comme type de retour, signifiant *“aucune valeur”*.
 :::
 
-###  2.1. Tableau récapitulatif : des méthodes statiques dans les classes Wrapper
+###  3.1. Tableau récapitulatif : des méthodes statiques dans les classes Wrapper
 
 | **Méthode statique**                                                              | **Wrapper**                                       | **Description**                                                                           |
 |:----------------------------------------------------------------------------------|:--------------------------------------------------|:------------------------------------------------------------------------------------------|
@@ -107,7 +219,7 @@ public class Main {
 }
 ```
 
-###  2.2. Tableau récapitulatif : des méthodes d’instances dans les classes Wrapper
+###  3.2. Tableau récapitulatif : des méthodes d’instances dans les classes Wrapper
 
 | **Méthode d’instance**                                       | **Wrapper**                                             | **Description**                                                                                                                   |
 |:-------------------------------------------------------------|:--------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------|
@@ -139,7 +251,7 @@ public class Main {
 }
 ```
 
-## 3. Classe fondamentale de Java : `String`
+## 4. Classe fondamentale de Java : `String`
 
 `String` est une classe du package `java.lang` utilisée pour représenter des chaînes de caractères. En Java, une chaîne de caractères est un objet de type String, et non un simple tableau de caractères.
 
@@ -173,7 +285,7 @@ public class Main {
 }
 ```
 
-## 4. Les tableaux
+## 5. Les tableaux
 
 **Un tableau** est une structure de données permettant de stocker plusieurs valeurs du même type dans une seule variable. Chaque valeur est accessible grâce à un indice numérique, qui commence toujours à 0.
 
@@ -206,12 +318,12 @@ public class Main {
 }
 ```
 
-## 5. Différence entre une variable locale et une variable d'instance (propriété)
+## 6. Différence entre une variable locale et une variable d'instance (propriété)
 
 Une **variable locale** représente un espace mémoire nommé servant à stocker 
 une valeur, tandis qu’une **variable d'instance (propriété)** correspond à une variable attachée à un objet ou à une classe. Contrairement aux variables, les propriétés doivent **obligatoirement être déclarées au sein d’une classe.**
 
-### 5.1. Variable locale
+### 6.1. Variable locale
 
 Une **variable locale est déclarée à l’intérieur d’une méthode**, d’un constructeur ou d’un bloc (`if`, `for`, etc.).
 
@@ -224,7 +336,7 @@ public class Main {
 }
 ```
 
-### 5.2. Variable d'instance
+### 6.2. Variable d'instance
 
 Une **variable d'instance est déclarée dans une classe**, en dehors de toute méthode.
 
@@ -243,11 +355,11 @@ public class Main {
 }
 ```
 
-## 6. Modificateurs d’accès
+## 7. Modificateurs d’accès
 
 **Les modificateurs d’accès** permettent de contrôler qui peut accéder à une classe, une méthode, une propriété ou un constructeur. Ils jouent un rôle essentiel pour organiser le code, protéger les données sensibles et structurer la visibilité entre les différentes parties d’un programme. 
 
-### 6.1. Pour les classes : `public`
+### 7.1. Pour les classes : `public`
 
 | **Modificateur**  | **Description**                                                |
 |:------------------|:---------------------------------------------------------------|
@@ -295,7 +407,7 @@ public class Main {
 }
 ```
 
-### 6.2. Pour les propriétés, méthodes et constructeurs : `public`, `private` et `protected`
+### 7.2. Pour les propriétés, méthodes et constructeurs : `public`, `private` et `protected`
 
 | **Modificateur**  | **Description**                                      |
 |:------------------|:-----------------------------------------------------|
@@ -453,11 +565,11 @@ public class Main {
 }
 ```
 
-## 7. Modificateurs non liés à l'accès
+## 8. Modificateurs non liés à l'accès
 
 **Les modificateurs non liés à l’accès** permettent de préciser le comportement, l’héritage ou l’utilisation d’une classe, d’une méthode ou d’une propriété, sans pour autant influencer leur visibilité. 
 
-### 7.1. Pour les classes : `final` et `abstract`
+### 8.1. Pour les classes : `final` et `abstract`
 
 | **Modificateur** | **Description**                                       |
 |:-----------------|:------------------------------------------------------|
@@ -505,7 +617,7 @@ public class Main {
 ```
 :::
 
-### 7.2. Pour les propriétés et méthodes : `final`, `abstract` et `static`
+### 8.2. Pour les propriétés et méthodes : `final`, `abstract` et `static`
 
 | **Modificateur** | **Description**                                                                                                                                                                   |
 |:-----------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -607,7 +719,7 @@ public class Main {
 Même si on écrit `ferrari.category = "A2";`, la valeur changera aussi pour l’objet `lamborghini`. En effet, une propriété `static` est partagée par tous les objets de la classe : elle n’appartient pas à une instance, mais à la classe elle-même.
 :::
 
-## 8. JavaBean : modèle d'encapsulation pour structurer de données
+## 9. JavaBean : modèle d'encapsulation pour structurer de données
 
 **L'encapsulation** est une règle essentielle en programmation orientée objet. Elle consiste à protéger les données internes d’un objet en les rendant inaccessibles directement depuis l’extérieur.
 
@@ -649,75 +761,6 @@ public class Main {
         double power = Ferrari.getEnginePower();
     }
 }
-```
-
-## 9. Héritage, liaison dynamique et polymorphisme
-
-```
-public class Vehicle {
-    private double weight;
-    private double enginePower;
-
-    public Vehicle(double weight, double enginePower) {
-        this.weight = weight;
-        this.enginePower = enginePower;
-    }
-
-    public double calculateSpeed(float seconds) {
-        return (enginePower / weight) * seconds;
-    }
-}
-
-class Car extends Vehicle {
-    public Car (double weight, double enginePower) {
-        super(weight, enginePower);
-    }
-
-    public double calculateSpeed(float seconds) {
-        return super.calculateSpeed(seconds);
-    }
-}
-
-class Truck extends Vehicle {
-    public Truck (double weight, double enginePower) {
-        super(weight, enginePower);
-    }
-
-    public double calculateSpeed(float seconds) {
-        return super.calculateSpeed(seconds);
-    }
-}
-```
-
-```
-public class Main {
-    public static void main(String[] args) {
-        Vehicle ferrari = new Car(1380, 570);
-        Vehicle mercedes = new Truck(11700, 625);
-
-        System.out.println("La ferrari après 10 secondes : " + ferrari.calculateSpeed(10) + " km/h");
-        System.out.println("La mercedes après 10 secondes : " + mercedes.calculateSpeed(10) + " km/h");
-    }
-}
-```
-
-**L'héritage** permet à une sous-classe de réutiliser les propriétés et méthodes d'une super-classe :
-
-```
-class Car extends Vehicle {...}
-
-class Truck extends Vehicle {...}
-```
-
-Le mot-clé `extends` signifie *"hérite de"*, c’est-à-dire que les classes `Car`et `Truck` héritent des propriétés et méthodes de la super-classe `Vehicle`. Autrement dit les classes `Car` et `Truck` sont des sous-classes de la super-classe `Vehicle`.
-
-**La liaison dynamique** est le mécanisme qui, à l’exécution, permet à Java de choisir la bonne méthode **override** à appeler, selon l’instance réelle. **L’override** signifie de redéfinir une méthode héritée d’une super-classe dans une sous-classe, pour changer son comportement. Autrement dit c'est réécrire une méthode existante pour qu’elle se comporte différemment dans la sous-classe.
-
-**Le polymorphisme** est un concept de la programmation orientée objet. Il signifie qu’un même nom peut représenter plusieurs comportements :
-
-```
-Vehicle ferrari = new Car(1380, 570);
-Vehicle mercedes = new Truck(11700, 625);
 ```
 
 ## 10. Les structures de données
