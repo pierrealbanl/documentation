@@ -1,7 +1,6 @@
 ---
 id: raccourcis-ide
 title: Raccourcis IDE
-sidebar_position: 1
 ---
 
 | **Raccourcis essentiels aux IDE JetBrains** | **Description**                                                                |

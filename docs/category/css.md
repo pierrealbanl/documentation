@@ -1,7 +1,6 @@
 ---
 id: css
 title: CSS
-sidebar_position: 6
 ---
 
 # CSS

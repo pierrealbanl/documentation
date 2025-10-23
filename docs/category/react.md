@@ -1,7 +1,6 @@
 ---
 id: react
 title: React
-sidebar_position: 4
 ---
 
 # React

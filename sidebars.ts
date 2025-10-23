@@ -6,11 +6,20 @@ module.exports = {
             type: 'category',
             label: 'Mastering the Stack: Complete Guide',
             items: [
-                'category/java',
+                {
+                    type: 'category',
+                    label: 'Java',
+                    items: [
+                        'category/java/introduction',
+                        'category/java/oop',
+                        'category/java/types',
+                        'category/java/reference-types'
+                    ]
+                },
                 'category/typescript',
                 'category/react',
                 'category/angular',
-                'category/css'
+                'category/css',
             ],
         },
         'english-guide'

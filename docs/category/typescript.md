@@ -1,7 +1,6 @@
 ---
 id: typescript
 title: TypeScript
-sidebar_position: 3
 ---
 
 # TypeScript

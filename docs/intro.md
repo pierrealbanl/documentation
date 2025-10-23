@@ -2,7 +2,6 @@
 id: intro
 slug: /
 title: Préambule
-sidebar_position: 0
 ---
 
 # Préambule

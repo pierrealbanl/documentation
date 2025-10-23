@@ -135,7 +135,7 @@ body {
 }
 
 /* Defines the color and weight for nested (child) menu items. */
-.menu__list .menu__list .menu__link {
+.menu__list .menu__list .menu__link[href*="java"] {
     color: #525252;
     font-weight: 400;
 }
