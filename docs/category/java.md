@@ -62,7 +62,6 @@ public class Main {
 
 **Le constructeur** `Vehicle(double weight, double enginePower) {...}` est une méthode spéciale utilisée pour créer une nouvelle instance (ou objet) de type `Vehicle`. Il sert à initialiser les propriétés de l'objet  (`weight` et `enginePower`) avec les valeurs fournies en paramètre, comme dans l’exemple `new Vehicle(1380, 570);`. Ainsi, dès sa création, l’objet contient déjà les informations de l’utilisateur.
 
-
 ## 2. Le polymorphisme : héritage, liaison dynamique et overloading
 
 ```java
@@ -116,70 +115,6 @@ public class Main {
 **L'héritage** permet à une sous-classe de réutiliser les propriétés et méthodes d'une super-classe :
 
 ```java
-class Car extends Vehicle {...}
-
-class Truck extends Vehicle {...}
-```
-
-Le mot-clé `extends` signifie *"hérite de"*, c’est-à-dire que les classes `Car`et `Truck` héritent des propriétés et méthodes de la super-classe `Vehicle`. Autrement dit les classes `Car` et `Truck` sont des sous-classes de la super-classe `Vehicle`.
-
-**La liaison dynamique** est un mécanisme qui détermine quelle méthode redéfinie (overriding) doit être exécutée au moment de l’exécution, selon le type réel de l’objet référencé. Elle permet d’appeler la bonne méthode même si la variable est de type parent, mais que l’objet réel appartient à une sous-classe.
-**Le constructeur** `Vehicle(double weight, double enginePower) {...}` est une méthode spéciale utilisée pour créer une nouvelle instance (ou objet) de type `Vehicle`. Il sert à initialiser les propriétés de l'objet  (`weight` et `enginePower`) avec les valeurs fournies en paramètre, comme dans l’exemple `new Vehicle(1380, 570);`. Ainsi, dès sa création, l’objet contient déjà les informations de l’utilisateur.
-
-
-## 2. Le polymorphisme : héritage, liaison dynamique et overloading
-
-```
-class Vehicle {
-    double weight;
-    double enginePower;
-
-    Vehicle(double weight, double enginePower) {
-        this.weight = weight;
-        this.enginePower = enginePower;
-    }
-
-    double calculateSpeed(float seconds) {
-        return (enginePower / weight) * seconds;
-    }
-}
-
-class Car extends Vehicle {
-    Car (double weight, double enginePower) {
-        super(weight, enginePower);
-    }
-
-    double calculateSpeed(float seconds) {
-        return super.calculateSpeed(seconds);
-    }
-}
-
-class Truck extends Vehicle {
-    Truck (double weight, double enginePower) {
-        super(weight, enginePower);
-    }
-
-    double calculateSpeed(float seconds) {
-        return super.calculateSpeed(seconds);
-    }
-}
-```
-
-```
-public class Main {
-    public static void main(String[] args) {
-        Vehicle ferrari = new Car(1380, 570);
-        Vehicle mercedes = new Truck(11700, 625);
-
-        System.out.println("La ferrari après 10 secondes : " + ferrari.calculateSpeed(10) + " km/h");
-        System.out.println("La mercedes après 10 secondes : " + mercedes.calculateSpeed(10) + " km/h");
-    }
-}
-```
-
-**L'héritage** permet à une sous-classe de réutiliser les propriétés et méthodes d'une super-classe :
-
-```
 class Car extends Vehicle {...}
 
 class Truck extends Vehicle {...}
@@ -201,20 +136,6 @@ double calculateSpeed(float seconds) { ... }
 Dans les sous-classes `Car` et `Truck`, la même méthode est redéfinie :
 
 ```java
-double calculateSpeed(float seconds) {
-    return super.calculateSpeed(seconds);
-}
-```
-**L’overriding** est un mécanisme qui permet à une sous-classe de fournir sa propre implémentation d’une méthode déjà définie dans la classe parente. La méthode redéfinie doit avoir **le même nom, les mêmes paramètres et le même type de retour** que celle du parent.
-
-La classe `Vehicle` définit :
-```
-double calculateSpeed(float seconds) { ... }
-```
-
-Dans les sous-classes `Car` et `Truck`, la même méthode est redéfinie :
-
-```
 double calculateSpeed(float seconds) {
     return super.calculateSpeed(seconds);
 }
@@ -244,44 +165,6 @@ class Vehicle {
 ```
 
 ```java
-public class Main {
-    public static void main(String[] args) {
-        Vehicle ferrari = new Vehicle(1380, 570);
-
-        System.out.println("La ferrari avec adhérence après 10 secondes : " + ferrari.calculateSpeed(10, 0.9) + " km/h");
-    }
-}
-```
-
-**Le polymorphisme** est le concept global qui dit qu’un même objet peut avoir plusieurs comportements différents selon le contexte. Il est rendu possible grâce à la combinaison de l’overloading (polymorphisme statique) et de la liaison dynamique (polymorphisme dynamique).
-
-## 3. Types primitifs vs classes Wrapper
-
-En Java, un type définit la nature d’une donnée, les valeurs qu’elle peut prendre et les opérations qu’on peut lui appliquer. On distingue les **types primitifs**, qui stockent directement des valeurs en mémoire, et les **classes wrapper**, qui stockent des adresses pointant vers des objets.
-
-**L’overloading** est un mécanisme qui détermine quelle méthode appeler en fonction des paramètres passés. Il permet de définir plusieurs méthodes avec le même nom, mais avec des paramètres différents. Ce choix est fait au moment de la compilation, ce qui permet au compilateur de savoir exactement quelle version de la méthode exécuter.
-
-```
-class Vehicle {
-    double weight;
-    double enginePower;
-
-    Vehicle(double weight, double enginePower) {
-        this.weight = weight;
-        this.enginePower = enginePower;
-    }
-
-    double calculateSpeed(float seconds) {
-        return (enginePower / weight) * seconds;
-    }
-
-    double calculateSpeed(float seconds, double traction) {
-        return (enginePower / weight) * seconds * traction;
-    }
-}
-```
-
-```
 public class Main {
     public static void main(String[] args) {
         Vehicle ferrari = new Vehicle(1380, 570);
