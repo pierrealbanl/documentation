@@ -5,11 +5,13 @@ title: 1. Concepts avancés de la programmation orientée objet (POO)
 
 # Concepts avancés de la programmation orientée objet (POO)
 
+**La programmation orientée objet** est une façon de programmer qui consiste à organiser le code autour d’objets plutôt que de simples fonctions. Un objet, c’est une sorte de *“chose”* qui représente un élément du monde réel (comme une voiture, un étudiant ou un compte bancaire). Ces objets sont créés à partir de classes, qui servent de modèles. Par exemple, une classe Voiture décrit ce qu’est une voiture, et on peut ensuite créer plusieurs objets de ce type (`ferrari`, `mercedes`, etc...).
+
 ## 1.1. Les classes et objets
 
-**Un objet** est une structure de données dynamique qui regroupe des **valeurs nommées appelées propriétés** et des **fonctions appelées  méthodes**, exactement comme une structure en C, mais en plus puissant, car on peut y **stocker des valeurs et des comportements**.
+**Un objet** est une structure de données dynamique qui regroupe des **valeurs nommées appelées propriétés** et des **fonctions appelées méthodes.**
 
-**Une classe** est un modèle ou un plan qui décrit **les caractéristiques et les comportements** que posséderont les objets créés à partir d’elle.
+**Une classe** est un modèle ou un plan qui décrit **les caractéristiques (propriétés) et les comportements (méthodes)** que posséderont les objets créés à partir d’elle.
 
 :::info
 Dans l’exemple qui suit, ne pas tenir compte des mots `public` et `static` et ni des types. L’important est de se concentrer uniquement sur les explications relatives aux propriétés, aux méthodes et au constructeur.

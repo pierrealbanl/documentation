@@ -1,9 +1,11 @@
 ---
 id: types
-title: 2. Les types en Java
+title: 2. Les types de référence
 ---
 
-# Les types en Java
+# Les types de référence
+
+Une variable de **type de référence** ne contient pas directement la valeur de la donnée, mais une référence, c’est-à-dire une sorte **d’adresse mémoire** qui pointe vers un objet stocké ailleurs. Lorsque l’on manipule une variable de type de référence, on ne manipule donc pas la donnée elle-même, mais un lien vers celle-ci. Contrairement aux types primitifs, les types de référence peuvent posséder des méthodes, des propriétés, et peuvent être hérités ou implémenter des interfaces.
 
 ## 2.1 Types primitifs vs classes Wrapper
 
@@ -84,35 +86,357 @@ public class Main {
 }
 ```
 
-## 2.2. Différence entre une variable locale et une variable d'instance (propriété)
+## 2.2. Classe fondamentale de Java : `String`
 
-Une **variable locale** représente un espace mémoire nommé servant à stocker
-une valeur, tandis qu’une **variable d'instance (propriété)** correspond à une variable attachée à un objet ou à une classe. Contrairement aux variables, les propriétés doivent **obligatoirement être déclarées au sein d’une classe.**
+`String` est une classe du package `java.lang` utilisée pour représenter des chaînes de caractères. En Java, une chaîne de caractères est un objet de type String, et non un simple tableau de caractères.
 
-Une **variable locale est déclarée à l’intérieur d’une méthode**, d’un constructeur ou d’un bloc (`if`, `for`, etc.).
+```java
+String s = "Hello World!";
+```
+
+| **Méthode d’instance**            | **Description**                                                                                              |
+|:----------------------------------|:-------------------------------------------------------------------------------------------------------------|
+| `length()`                        | Renvoie la **longueur** d’une chaîne de caractères (nombre total de caractères).                             |
+| `charAt(int i)`                   | Retourne le **caractère** situé à la position indiquée dans une chaîne de caractères (l’index commence à 0). |
+| `substring(int i, int j)`         | Extrait une **sous-chaîne de caractères** comprise entre les indices `start` (inclus) et `end` (exclu).      |
+| `equals(Object obj)`              | Compare **le contenu** de deux chaînes de caractères et retourne `true` si elles sont identiques.            |
+| `toUpperCase()` / `toLowerCase()` | Convertit une chaîne de caractères en **majuscules** ou en **minuscules**.                                   |
+| `compareTo(String s)`             | Compare deux chaînes de caractères selon l’**ordre alphabétique** (résultat négatif, nul ou positif).        |
+| `concat(String s)`                | Concatène une chaîne de caractères avec une autre et renvoie le **résultat combiné**.                        |
 
 ```java
 public class Main {
     public static void main(String[] args) {
-        int i = 5;
-        System.out.println(i);
+        String s = "Hello World";
+
+        System.out.println(s.length());
+        System.out.println(s.charAt(3));
+        System.out.println(s.substring(0, 5));
+        System.out.println(s.equals("hello world"));
+        System.out.println(s.toUpperCase());
+        System.out.println(s.compareTo("Hello Bob!"));
+        System.out.println(s.concat("!"));
     }
 }
 ```
 
-Une **variable d'instance est déclarée dans une classe**, en dehors de toute méthode.
+## 2.3. `Object`, la superclasse universelle en Java
+
+La classe `Object` occupe une place essentielle dans la hiérarchie des types de référence. Elle constitue la superclasse de toutes les classes. Autrement dit, toute classe qu’elle provienne de la bibliothèque standard ou qu’elle soit définie par le programmeur hérite implicitement de `Object`, même si cette relation n’est pas explicitement mentionnée dans le code.
+
+Par exemple, la déclaration suivante :
+
+```
+class Vehicle {...}
+```
+
+est équivalente à :
+
+```
+class Vehicle extends Object {...}
+```
+
+Même sans la mention `extends Object`, le compilateur Java l’ajoute automatiquement. Ainsi, puisque toutes les classes dérivent de `Object`, chaque instance en Java possède un ensemble minimal de méthodes communes définies dans cette classe, telles que `toString()` ou `equals(Object obj)`.
+
+## 2.4. Les interfaces
+
+**Une interface** est un contrat qui définit un ensemble de méthodes que les classes qui l’implémentent doivent fournir.
+
+```java
+interface VehicleBehavior {
+    void start();
+    void stop();
+}
+
+public class Vehicle implements VehicleBehavior {
+    public void start() {
+        System.out.println("La voiture démarre !");
+    }
+
+    public void stop() {
+        System.out.println("La voiture s'arrête.");
+    }
+}
+```
 
 ```java
 public class Main {
-    int i;
+    public static void main(String[] args) {
+        Vehicle ferrari = new Vehicle();
 
-    Main(int i) {
-        this.i = i;
+        ferrari.start();
+        ferrari.stop();
+    }
+}
+```
+
+:::warning
+En Java, il est recommandé de placer chaque interface dans son propre fichier. Mettre une interface et une classe dans le même fichier est considéré comme une mauvaise pratique.
+
+```java title="VehicleBehavior.java"
+public interface VehicleBehavior {
+    void start();
+    void stop();
+}
+```
+:::
+
+### 2.4.1. Les interfaces multiple
+
+Java permet à une classe d’implémenter plusieurs interfaces, contrairement à l’héritage simple entre classes.
+
+```java title="VehicleBehavior.java"
+public interface VehicleBehavior {
+    void start();
+    void stop();
+}
+```
+
+```java title="ElectricBehavior.java"
+public interface ElectricBehavior {
+    void chargeBattery();
+}
+```
+
+Il suffit de séparer les interfaces par une virgule lors de leur déclaration :
+
+```java
+public class Vehicle implements VehicleBehavior, ElectricBehavior {
+    public void start() {
+        System.out.println("Le véhicule démarre !");
     }
 
+    public void stop() {
+        System.out.println("Le véhicule s'arrête.");
+    }
+
+    public void chargeBattery() {
+        System.out.println("La batterie est en charge...");
+    }
+}
+```
+
+```java
+public class Main {
     public static void main(String[] args) {
-        Main main = new Main(5);
-        System.out.println(main.i);
+        Vehicle tesla = new Vehicle();
+
+        tesla.start();
+        tesla.stop();
+        tesla.chargeBattery();
+    }
+}
+```
+
+## 2.5. Les tableaux
+
+**Un tableau** est une structure de données permettant de stocker plusieurs valeurs du même type dans une seule variable. Chaque valeur est accessible grâce à un indice numérique, qui commence toujours à 0.
+
+Il existe deux manières principales de créer un tableau :
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        int[] n = new int[3];
+        n[0] = 10;
+        n[1] = 15;
+        n[2] = 20;
+
+        for (int i = 0; i < n.length; i++) {
+            System.out.println(n[i]);
+        }
+    }
+}
+```
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        int[] n = {10, 15, 20};
+
+        for (int i = 0; i < n.length; i++) {
+            System.out.println(n[i]);
+        }
+    }
+}
+```
+
+## 2.6. Les structures de données
+
+Les structures de données servent à stocker et organiser les informations de façon à les rendre plus faciles et rapides à exploiter. 
+
+| Interface | Classe       | Particularités                                                 | Doublons autorisés  | Ordre conservé | Accès rapide              |
+| :-------- | :----------- | :------------------------------------------------------------- | :------------------ | :------------- | :------------------------ |
+| `List`    | `ArrayList`  | Tableau redimensionnable, accès par index                      | Oui                 | Oui            | Oui                       |
+| `Set`     | `HashSet`    | Éléments uniques, non ordonnés                                 | Non                 | Non            | Oui                       |
+| `List`    | `LinkedList` | Éléments reliés entre eux (chaque nœud pointe vers le suivant) | Oui                 | Oui            | Non (parcours séquentiel) |
+| `Map`     | `HashMap`    | Chaque clé est unique et associée à une valeur                 | Non (pour les clés) | Non            | Oui (par clé)             |
+
+### 2.6.1. Liste dynamique ordonnée : `ArrayList`
+
+`ArrayList` est une classe qui représente une liste dynamique d’éléments (comme un tableau, mais qui peut changer de taille). Les principales méthodes disponibles pour manipuler une `ArrayList` sont : `add`, `get`, `set`, `size`, `remove` et `clear` :
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+public class Main {
+    public static void main(String[] args) {
+        List<String> Vehicle = new ArrayList<String>();
+
+        Vehicle.add("Ferrari");
+        Vehicle.add("Lamborghini");
+        Vehicle.add("Mercedes");
+        System.out.println("Les véhicules disponibles dans la liste : " + Vehicle);
+
+        System.out.println(Vehicle.get(0));
+
+        Vehicle.set(2, "Audi");
+        System.out.println("Les véhicules disponibles dans la liste : " + Vehicle);
+
+        System.out.println("La taille de la liste est " + Vehicle.size());
+
+        Vehicle.remove(1);
+        Vehicle.remove(1);
+        System.out.println("Les véhicules disponibles dans la liste : " + Vehicle);
+
+        Vehicle.clear();
+        System.out.println("Les véhicules disponibles dans la liste : " + Vehicle);
+    }
+}
+```
+
+Par ailleurs, la classe `Collections` propose la méthode `sort()` qui permet de trier une `ArrayList` en ordre alphabétique ou numérique.
+
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Collections;
+
+public class Main {
+    public static void main(String[] args) {
+        List<String> vehicle = new ArrayList<String>();
+
+        vehicle.add("Ferrari");
+        vehicle.add("Lamborghini");
+        vehicle.add("Mercedes");
+
+        Collections.sort(vehicle);
+        System.out.println("Les véhicules disponibles dans la liste après le tri : " + vehicle);
+    }
+}
+```
+
+###  2.6.2. Ensemble non ordonné d’éléments uniques : `HashSet`
+
+La classe `HashSet` est une structure de données qui permet de stocker une collection d’éléments uniques, sans ordre particulier. Contrairement à une `ArrayList`, un `HashSet` ne conserve pas l’ordre d’insertion et n’autorise pas les doublons.
+
+Les principales méthodes disponibles pour manipuler un `HashSet` sont : `add`, `contains`, `size`, `remove` et `clear` :
+
+```java
+import java.util.HashSet;
+import java.util.Set;
+
+public class Main {
+    public static void main(String[] args) {
+        Set<String> vehicle = new HashSet<String>();
+
+        vehicle.add("Ferrari");
+        vehicle.add("Ferrari"); // Impossible d’ajouter un doublon
+        vehicle.add("Lamborghini");
+        vehicle.add("Mercedes");
+        System.out.println("Les véhicules disponibles dans la liste : " + vehicle);
+
+        System.out.println(vehicle.contains("Mercedes"));
+
+        System.out.println("La taille de la liste est " + vehicle.size());
+
+        vehicle.remove("Mercedes");
+        vehicle.remove("Lamborghini");
+        System.out.println("Les véhicules disponibles dans la liste : " + vehicle);
+
+        vehicle.clear();
+        System.out.println("Les véhicules disponibles dans la liste : " + vehicle);
+    }
+}
+```
+
+### 2.6.3. Liste chaînée dynamique : `LinkedList`
+
+La classe `LinkedList` est une structure de données qui représente une liste chaînée. Une liste chaînée est une façon différente de stocker plusieurs éléments les uns à la suite des autres : elle est constituée d’une succession de nœuds reliés entre eux, où chaque élément pointe vers le suivant et le précédent.
+
+Contrairement à une `ArrayList`, qui repose sur un tableau dynamique, une `LinkedList` facilite les insertions et suppressions fréquentes d’éléments, notamment au début ou au milieu de la liste. En revanche, l’accès direct à un élément par son index est plus lent, car il faut parcourir la chaîne maillon par maillon.
+
+Les principales méthodes disponibles pour manipuler une `LinkedList` sont : `add`, `get`, `set`, `contains`, `size`, `sort`, `remove` et `clear` :
+
+```java
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Collections;
+
+public class Main {
+    public static void main(String[] args) {
+        List<String> vehicle = new LinkedList<String>();
+
+        vehicle.add("Ferrari");
+        vehicle.add("Lamborghini");
+        vehicle.add("Mercedes");
+
+        System.out.println(vehicle.get(0));
+
+        vehicle.set(2, "Audi");
+        System.out.println("Les véhicules disponibles dans la liste : " + vehicle);
+
+        System.out.println(vehicle.contains("Mercedes"));
+
+        System.out.println("La taille de la liste est " + vehicle.size());
+
+        Collections.sort(vehicle);
+        System.out.println("Les véhicules disponibles dans la liste après le tri : " + vehicle);
+
+        vehicle.remove("Audi");
+        vehicle.remove("Lamborghini");
+        System.out.println("Les véhicules disponibles dans la liste : " + vehicle);
+
+        vehicle.clear();
+        System.out.println("Les véhicules disponibles dans la liste : " + vehicle);
+    }
+}
+```
+
+### 2.6.4. Table de correspondance : `HashMap`
+
+La classe `HashMap` est une structure de données qui permet de stocker des paires clé/valeur. Chaque clé est unique et associée à une valeur correspondante. Cette structure fonctionne comme un dictionnaire : elle permet de retrouver rapidement une valeur à partir de sa clé, sans avoir à parcourir toute la collection. En revanche, l’ordre d’insertion des éléments n’est pas conservé.
+
+Les principales méthodes disponibles pour manipuler un `HashMap` sont : `put`, `get`, `containsKey`, `containsValue`, `remove`, `size` et `clear` :
+
+```java
+import java.util.HashMap;
+import java.util.Map;
+
+public class Main {
+    public static void main(String[] args) {
+        Map<String, Integer> vehicle = new HashMap<String, Integer>();
+
+        vehicle.put("Ferrari", 570);
+        vehicle.put("Lamborghini", 740);
+        vehicle.put("Mercedes", 625);
+        System.out.println("Les véhicules disponibles dans la liste : " + vehicle);
+
+        System.out.println(vehicle.get("Ferrari"));
+
+        System.out.println(vehicle.containsKey("Ferrari"));
+        System.out.println(vehicle.containsValue(570));
+
+        System.out.println("La taille de la liste est " + vehicle.size());
+
+        vehicle.remove("Mercedes");
+        vehicle.remove("Lamborghini");
+        System.out.println("Les véhicules disponibles dans la liste : " + vehicle);
+
+        vehicle.clear();
+        System.out.println("Les véhicules disponibles dans la liste : " + vehicle);
     }
 }
 ```
