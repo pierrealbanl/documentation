@@ -321,7 +321,70 @@ public class Main {
 }
 ```
 
-## 2.7. Les structures de données
+## 2.7. Les types génériques
+
+Les types génériques (`T`, ou n’importe quel autre nom de paramètre de type comme `E`, `K`, `V`, etc.) sont des paramètres qui peuvent être remplacés par n’importe quel type réel (classe ou interface) lors de la création de l’objet.
+
+| Symbole  | Signification | Exemple       |
+|:---------|:--------------|:--------------|
+| `T`      | Type          | `Box<T>`      |
+| `E`      | Element       | `List<E>`     |
+| `K`, `V` | Key, Value    | `Map<K, V>`   |
+
+```java
+public class Vehicle<T> {
+    private T weight;
+    private T enginePower;
+
+    public Vehicle(T weight, T enginePower) {
+        this.weight = weight;
+        this.enginePower = enginePower;
+    }
+
+    public T getWeight() {
+        return weight;
+    }
+
+    public T getEnginePower() {
+        return enginePower;
+    }
+}
+```
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        Vehicle<Integer> ferrari = new Vehicle(1380, 570);
+        System.out.println("Le poid de la Ferrari : " + ferrari.getWeight());
+        System.out.println("La puissance de la Ferrari : " + ferrari.getEnginePower());
+    }
+}
+```
+
+:::info
+Dans notre contexte, étant donné que les propriétés weight et enginePower correspondent à des valeurs entières, il est nécessaire d’indiquer le type générique Integer au moment de l’instanciation de l’objet `Vehicle<Integer>`.
+:::
+
+:::danger
+À noter que les opérations arithmétiques ne sont pas possibles avec les types génériques, puisque le compilateur ne peut pas savoir si le type utilisé correspond à un nombre ou non. En effet, un paramètre générique peut représenter tout type d’objet.
+
+```java
+public class Vehicle<T> {
+    private T weight;
+    private T enginePower;
+
+    public Vehicle(T weight, T enginePower) {
+        this.weight = weight;
+        this.enginePower = enginePower;
+    }
+
+    public T calculateSpeed(float seconds) {
+        return (enginePower / weight) * seconds; // Erreur de compilation
+    }
+}
+```
+:::
+## 2.8. Les structures de données
 
 Les structures de données servent à stocker et organiser les informations de façon à les rendre plus faciles et rapides à exploiter. 
 
@@ -332,7 +395,7 @@ Les structures de données servent à stocker et organiser les informations de f
 | `List`    | `LinkedList` | Éléments reliés entre eux (chaque nœud pointe vers le suivant) | Oui                 | Oui            | Non (parcours séquentiel) |
 | `Map`     | `HashMap`    | Chaque clé est unique et associée à une valeur                 | Non (pour les clés) | Non            | Oui (par clé)             |
 
-### 2.7.1. Liste dynamique ordonnée : `ArrayList`
+### 2.8.1. Liste dynamique ordonnée : `ArrayList`
 
 `ArrayList` est une classe qui représente une liste dynamique d’éléments (comme un tableau, mais qui peut changer de taille). Les principales méthodes disponibles pour manipuler une `ArrayList` sont : `add`, `get`, `set`, `size`, `remove` et `clear` :
 
@@ -388,7 +451,7 @@ public class Main {
 }
 ```
 
-###  2.7.2. Ensemble non ordonné d’éléments uniques : `HashSet`
+###  2.8.2. Ensemble non ordonné d’éléments uniques : `HashSet`
 
 La classe `HashSet` est une structure de données qui permet de stocker une collection d’éléments uniques, sans ordre particulier. Contrairement à une `ArrayList`, un `HashSet` ne conserve pas l’ordre d’insertion et n’autorise pas les doublons.
 
@@ -422,7 +485,7 @@ public class Main {
 }
 ```
 
-### 2.7.3. Liste chaînée dynamique : `LinkedList`
+### 2.8.3. Liste chaînée dynamique : `LinkedList`
 
 La classe `LinkedList` est une structure de données qui représente une liste chaînée. Une liste chaînée est une façon différente de stocker plusieurs éléments les uns à la suite des autres : elle est constituée d’une succession de nœuds reliés entre eux, où chaque élément pointe vers le suivant et le précédent.
 
@@ -465,7 +528,7 @@ public class Main {
 }
 ```
 
-### 2.7.4. Table de correspondance : `HashMap`
+### 2.8.4. Table de correspondance : `HashMap`
 
 La classe `HashMap` est une structure de données qui permet de stocker des paires clé/valeur. Chaque clé est unique et associée à une valeur correspondante. Cette structure fonctionne comme un dictionnaire : elle permet de retrouver rapidement une valeur à partir de sa clé, sans avoir à parcourir toute la collection. En revanche, l’ordre d’insertion des éléments n’est pas conservé.
 

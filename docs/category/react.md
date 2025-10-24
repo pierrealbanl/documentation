@@ -155,7 +155,7 @@ Dans cet exemple, si `isVisible` vaut `true`, le texte affiché sera *"Hello Wor
 
 Une autre technique consiste à préparer le contenu avant le return du composant. On déclare une variable, initialisée le plus souvent à null, puis un if classique est utilisé pour lui attribuer du JSX en fonction de la condition :
 
-```
+```ts
 let content = null;
 if (isOpen) {
   content = <p>Ouvert</p>;
