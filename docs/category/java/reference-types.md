@@ -36,7 +36,7 @@ Petite particularité : `void` n’est pas un type de valeur utilisable pour des
 | `toString(type)`                                                                  | Tous                                              | Transforme un **primitif** en une chaîne de caractères.                                   |
 
 :::info
-*En Java, String fait partie des types de référence. Pour une explication détaillée, consulte la section 3.1.*
+*En Java, String fait partie des types de référence. Pour une explication détaillée, consulte la section 2.2.*
 :::
 
 ```java

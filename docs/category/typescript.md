@@ -85,7 +85,7 @@ notAllowed();
 :::
 
 :::info
-Si la notion d’objet n’est pas encore claire, il est possible d’ignorer cette exemple pour le moment. *Il est préférable de poursuivre avec la partie 3 sur **les objets et tableaux**, puis d’y revenir une fois ces notions acquises.*
+*Si la notion d’objet n’est pas claire, des explications sont proposées dans la section 5.*
 :::
 
 ### 2.2. `let`
@@ -102,9 +102,69 @@ function main(): void {
 main();
 ```
 
-## 3. Les objets et tableaux
+## 3. Les fonctions régulières : déclaration et expression de fonction
 
-**Un objet** est une structure de données qui permet de regrouper plusieurs valeurs sous forme de paires clé / valeur, avec un type précis pour chaque clé :
+En TypeScript, il y a plusieurs manières d’écrire une fonction régulière :
+
+```ts
+function main(a: number, b: number): number {
+    return a + b;
+}
+
+const functionInVariable = function(a: number, b: number): number {
+    return a + b;
+}
+
+console.log(main(5, 5));
+console.log(functionInVariable(5, 5));
+```
+
+Les deux formes réalisent exactement la même opération : elles définissent une fonction régulière qui peut être exécutée de la même manière. La distinction principale entre **une déclaration de fonction** et **une expression de fonction** réside dans le comportement de hoisting :
+
+Le **hoisting** est un mécanisme de JavaScript dans lequel certaines déclarations sont traitées avant l’exécution du code. Concrètement, le moteur JavaScript déplace en mémoire les déclarations de fonctions au début de leur portée (scope). Cela signifie qu’une fonction déclarée avec la syntaxe `function` peut être appelée avant sa définition dans le code source, car elle a déjà été enregistrée par le moteur. Les variables déclarées avec `let` et `const` ne bénéficient pas du hoisting de la même manière : elles sont placées en mémoire mais ne sont accessibles qu’après leur ligne de déclaration (zone dite de Temporal Dead Zone).
+
+- Déclaration de fonction : accessible dans tout le scope, y compris avant sa définition.
+- Expression de fonction : accessible uniquement après son assignation à une variable.
+
+## 4. Fonctions fléchées
+
+Les fonctions fléchées (arrow functions) sont une manière raccourcie d’écrire des fonctions en TypeScript. Elles utilisent la syntaxe `(): type => {...}` au lieu du mot-clé `function`.
+
+Elles sont généralement assignées à une variable : cela permet de manipuler la fonction comme une donnée. On peut la stocker, la transmettre en paramètre ou la renvoyer en résultat. Cette approche rend le code plus flexible, réutilisable et modulaire.
+
+```ts
+function functionInVariable(a: number, b: number): number {
+    return a + b;
+}
+
+const ArrowFunction = (a: number, b: number): number => a + b;
+
+console.log(functionInVariable(5,5));
+console.log(ArrowFunction(5,5));
+```
+
+### 4.1. Retour implicite vs retour explicite
+
+Une fonction fléchée peut utiliser deux formes de retour :
+
+```ts
+const ArrowFunctionImplicit = (a: number, b: number): number => a + b;
+
+const ArrowFunctionExplicit = (a: number, b: number): number => {
+    return a + b;
+}
+
+console.log(ArrowFunctionImplicit(5,5));
+console.log(ArrowFunctionExplicit(5,5));
+```
+
+- Retour implicite : lorsque le corps de la fonction est écrit sans accolades `{...}`, la valeur de l’expression est automatiquement retournée.
+- Retour explicite : lorsque le corps est entouré d’accolades `{...}`, l’utilisation du mot-clé `return` est nécessaire pour renvoyer une valeur.
+
+
+## 5. Les objets
+
+En TypeScript, **un objet** est une structure de données qui regroupe plusieurs valeurs sous forme de paires clé-valeur, chaque clé étant associée à un type précis. Il peut être créé librement sans passer par une classe, tandis qu’en Java, un objet provient toujours d’une classe définie à l’avance.
 
 ```ts
 function main(): void {
@@ -118,7 +178,9 @@ function main(): void {
 main();
 ```
 
-**Un tableau** est une structure de données ordonnée qui permet de stocker plusieurs valeurs du même type sous un même nom de variable, accessibles grâce à leur indice numérique (commençant à 0) :
+## 6. Les tableaux
+
+**Les tableaux** sont plus simples à manipuler grâce aux méthodes intégrées directement dans le langage, tandis qu’en Java, leur utilisation est plus stricte et leur taille fixe dès la création.
 
 ```ts
 function main(): void {
@@ -136,7 +198,63 @@ function main(): void {
 main();
 ```
 
-### 3.1. Typage réutilisable avec `type`
+### 6.1. Transformation et filtrage des tableaux avec `.map()` et `.filter()`
+
+La méthode `.map()` parcourt chaque élément d’un tableau, applique une fonction à chacun d’eux et renvoie un nouveau tableau contenant les valeurs transformées. Le tableau d’origine reste inchangé, car les modifications sont stockées dans une nouvelle variable :
+
+```ts
+function main(): void {
+    const arrayNumbers: number[] = [5, 5];
+    const doubledNumbers: number[] = arrayNumbers.map(function (n: number): number {
+        return n * 2;
+    });
+    console.log(doubledNumbers);
+
+    const arrayString: string[] = ["Bob", "Alice"];
+    const upperCaseNames: string[] = arrayString.map(function (s: string): string {
+        return s.toUpperCase();
+    });
+    console.log(upperCaseNames);
+}
+
+main();
+```
+
+:::info
+De plus, les fonctions fléchées peuvent être utilisées :
+
+```ts
+function main(): void {
+    const arrayNumbers: number[] = [5, 5];
+    const doubledNumbers: number[] = arrayNumbers.map((n: number): number => n * 2);
+    console.log(doubledNumbers);
+
+    const arrayString: string[] = ["Bob", "Alice"];
+    const upperCaseNames: string[] = arrayString.map((s: string): string => s.toUpperCase());
+    console.log(upperCaseNames);
+}
+
+main();
+```
+:::
+
+La méthode `.filter()` parcourt chaque élément d’un tableau, applique une condition à chacun d’eux et renvoie un nouveau tableau contenant uniquement les éléments qui remplissent cette condition. Le tableau d’origine reste inchangé, car le filtrage est enregistré dans une nouvelle variable.
+
+```ts
+function main(): void {
+    const arrayNumbers: number[] = [5, 5];
+    const doubledNumbers: number[] = arrayNumbers.filter((n: number): boolean => n < 5);
+    console.log(doubledNumbers);
+
+    const arrayString: string[] = ["Bob", "Alice"];
+    const upperCaseNames: string[] = arrayString.filter((s: string): boolean => s.startsWith('A'));
+    console.log(upperCaseNames);
+}
+
+main();
+```
+
+## 7. Typage réutilisable avec `type`
 
 `type` permet de donner un alias à une forme de donnée (objet, tableau, fonction, etc.) afin de la réutiliser facilement dans le code.
 
@@ -163,9 +281,9 @@ function main(): void {
 main();
 ```
 
-## 4. Les interfaces
+## 8. Les interfaces
 
-**Une interface** permet de définir un contrat de structure. Elle décrit les propriétés et les méthodes qu’une entité (objet, classe ou fonction) doit implémenter.
+En TypeScript, **une interface** sert à décrire la structure d’un objet pour le typage, alors qu’en Java, elle sert à imposer un comportement que les classes doivent implémenter.
 
 ```ts
 interface Vehicle {
@@ -208,64 +326,3 @@ function main(): void {
 
 main();
 ```
-
-## 5. Types génériques
-
-## 6. Les fonctions régulières : déclaration et expression de fonction
-
-En TypeScript, il y a plusieurs manières d’écrire une fonction régulière :
-
-```ts
-function main(a: number, b: number): number {
-    return a + b;
-}
-
-const functionInVariable = function(a: number, b: number): number {
-    return a + b;
-}
-
-console.log(main(5, 5));
-console.log(functionInVariable(5, 5));
-```
-
-Les deux formes réalisent exactement la même opération : elles définissent une fonction régulière qui peut être exécutée de la même manière. La distinction principale entre **une déclaration de fonction** et **une expression de fonction** réside dans le comportement de hoisting :
-
-Le **hoisting** est un mécanisme de JavaScript dans lequel certaines déclarations sont traitées avant l’exécution du code. Concrètement, le moteur JavaScript déplace en mémoire les déclarations de fonctions au début de leur portée (scope). Cela signifie qu’une fonction déclarée avec la syntaxe `function` peut être appelée avant sa définition dans le code source, car elle a déjà été enregistrée par le moteur. Les variables déclarées avec `let` et `const` ne bénéficient pas du hoisting de la même manière : elles sont placées en mémoire mais ne sont accessibles qu’après leur ligne de déclaration (zone dite de Temporal Dead Zone).
-
-- Déclaration de fonction : accessible dans tout le scope, y compris avant sa définition.
-- Expression de fonction : accessible uniquement après son assignation à une variable.
-
-## 7. Fonctions fléchées
-
-Les fonctions fléchées (arrow functions) sont une manière raccourcie d’écrire des fonctions en TypeScript. Elles utilisent la syntaxe `(): type => {...}` au lieu du mot-clé `function`.
-
-Elles sont généralement assignées à une variable : cela permet de manipuler la fonction comme une donnée. On peut la stocker, la transmettre en paramètre ou la renvoyer en résultat. Cette approche rend le code plus flexible, réutilisable et modulaire.
-
-```ts
-function functionInVariable(a: number, b: number): number {
-    return a + b;
-}
-
-const ArrowFunction = (a: number, b: number): number => a + b;
-
-console.log(functionInVariable(5,5));
-console.log(ArrowFunction(5,5));
-```
-
-### 7.1. Retour implicite vs retour explicite
-
-Une fonction fléchée peut utiliser deux formes de retour :
-
-```ts
-const ArrowFunctionImplicit = (a: number, b: number): number => a + b;
-
-const ArrowFunctionExplicit = (a: number, b: number): number => {
-    return a + b;
-}
-
-console.log(ArrowFunctionImplicit(5,5));
-console.log(ArrowFunctionExplicit(5,5));
-```
-
-- Retour implicite : lorsque le corps de la fonction est écrit sans accolades `{...}`, la valeur de l’expression est automatiquement retournée.
-- Retour explicite : lorsque le corps est entouré d’accolades `{...}`, l’utilisation du mot-clé `return` est nécessaire pour renvoyer une valeur.
