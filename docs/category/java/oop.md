@@ -37,7 +37,7 @@ class Vehicle {
 public class Main {
     public static void main(String[] args) {
         Vehicle ferrari = new Vehicle(1380, 570);
-        System.out.println("La ferrari après 10 secondes : " + ferrari.calculateSpeed(10) + " km/h");
+        System.out.println("La Ferrari après 10 secondes : " + ferrari.calculateSpeed(10) + " km/h");
     }
 }
 ```
@@ -132,7 +132,7 @@ class Vehicle {
 public class Main {
     public static void main(String[] args) {
         Vehicle ferrari = new Vehicle(1380, 570);
-        System.out.println("La ferrari après 10 secondes : " + ferrari.calculateSpeed(10) + " km/h");
+        System.out.println("La Ferrari après 10 secondes : " + ferrari.calculateSpeed(10) + " km/h");
     }
 }
 ```
@@ -165,7 +165,7 @@ public class Main {
         Vehicle ferrari = new Vehicle(1380, 570);
         // Erreur de compilation
 
-        System.out.println("La ferrari après 10 secondes : " + ferrari.calculateSpeed(10) + " km/h");
+        System.out.println("La Ferrari après 10 secondes : " + ferrari.calculateSpeed(10) + " km/h");
         // Erreur de compilation
     }
 }
@@ -220,7 +220,7 @@ package example;
 public class Main {
     public static void main(String[] args) {
         Car ferrari = new Car(1380, 570);
-        System.out.println("La ferrari après 10 secondes : " + ferrari.calculateSpeed(10) + " km/h");
+        System.out.println("La Ferrari après 10 secondes : " + ferrari.calculateSpeed(10) + " km/h");
     }
 }
 ```
@@ -259,7 +259,7 @@ package example;
 public class Main {
     public static void main(String[] args) {
         Vehicle ferrari = new Vehicle(1380, 570);
-        System.out.println("La ferrari après 10 secondes : " + ferrari.calculateSpeed(10) + " km/h");
+        System.out.println("La Ferrari après 10 secondes : " + ferrari.calculateSpeed(10) + " km/h");
     }
 }
 ```
@@ -506,8 +506,8 @@ public class Main {
         Vehicle ferrari = new Car(1380, 570);
         Vehicle mercedes = new Truck(11700, 625);
 
-        System.out.println("La ferrari après 10 secondes : " + ferrari.calculateSpeed(10) + " km/h");
-        System.out.println("La mercedes après 10 secondes : " + mercedes.calculateSpeed(10) + " km/h");
+        System.out.println("La Ferrari après 10 secondes : " + ferrari.calculateSpeed(10) + " km/h");
+        System.out.println("La Mercedes après 10 secondes : " + mercedes.calculateSpeed(10) + " km/h");
     }
 }
 ```
@@ -569,7 +569,7 @@ public class Main {
     public static void main(String[] args) {
         Vehicle ferrari = new Vehicle(1380, 570);
 
-        System.out.println("La ferrari avec adhérence après 10 secondes : " + ferrari.calculateSpeed(10, 0.9) + " km/h");
+        System.out.println("La Ferrari avec adhérence après 10 secondes : " + ferrari.calculateSpeed(10, 0.9) + " km/h");
     }
 }
 ```

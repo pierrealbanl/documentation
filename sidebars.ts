@@ -12,7 +12,7 @@ module.exports = {
                     items: [
                         'category/java/introduction',
                         'category/java/oop',
-                        'category/java/types',
+                        'category/java/reference-types',
                     ]
                 },
                 'category/typescript',
