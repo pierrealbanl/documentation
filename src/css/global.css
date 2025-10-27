@@ -109,6 +109,7 @@ body {
 
 /* Highlights the active menu item with a blue left border. */
 .menu__link--active {
+    margin-left: -4px;
     border-left: 4px solid #0f62fe;
 }
 

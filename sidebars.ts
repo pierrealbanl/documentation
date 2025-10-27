@@ -13,6 +13,7 @@ module.exports = {
                         'category/java/introduction',
                         'category/java/oop',
                         'category/java/reference-types',
+                        'category/java/java-advanced'
                     ]
                 },
                 'category/typescript',
