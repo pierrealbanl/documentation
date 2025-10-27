@@ -127,13 +127,13 @@ La classe `Object` occupe une place essentielle dans la hiérarchie des types de
 Par exemple, la déclaration suivante :
 
 ```java
-class Vehicle {...}
+public class Vehicle {...}
 ```
 
 est équivalente à :
 
 ```java
-class Vehicle extends Object {...}
+public class Vehicle extends Object {...}
 ```
 
 Même sans la mention `extends Object`, le compilateur Java l’ajoute automatiquement. Ainsi, puisque toutes les classes dérivent de `Object`, chaque instance en Java possède un ensemble minimal de méthodes communes définies dans cette classe, telles que `toString()` ou `equals(Object obj)`.
@@ -169,6 +169,10 @@ public class Main {
     }
 }
 ```
+
+:::info
+`implements` permet à une classe de promettre qu’elle va fournir le code des méthodes définies dans une interface.
+:::
 
 :::warning
 En Java, il est recommandé de placer chaque interface dans son propre fichier. Mettre une interface et une classe dans le même fichier est considéré comme une mauvaise pratique.
@@ -379,7 +383,7 @@ public class Vehicle<T> {
     }
 
     public T calculateSpeed(float seconds) {
-        return (enginePower / weight) * seconds; // Erreur de compilation
+        return ((enginePower / weight) * seconds) * 3.6; // Erreur de compilation
     }
 }
 ```

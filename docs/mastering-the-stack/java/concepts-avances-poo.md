@@ -28,7 +28,7 @@ class Vehicle {
     }
 
     double calculateSpeed(float seconds) {
-        return (enginePower / weight) * seconds;
+        return ((enginePower / weight) * seconds) * 3.6;
     }
 }
 ```
@@ -123,7 +123,7 @@ class Vehicle {
     }
 
     public double calculateSpeed(float seconds) {
-        return (enginePower / weight) * seconds;
+        return ((enginePower / weight) * seconds) * 3.6;
     }
 }
 ```
@@ -154,7 +154,7 @@ class Vehicle {
     }
 
     private double calculateSpeed(float seconds) {
-        return (enginePower / weight) * seconds;
+        return ((enginePower / weight) * seconds) * 3.6;
     }
 }
 ```
@@ -198,7 +198,7 @@ class Vehicle {
     }
 
     protected double calculateSpeed(float seconds) {
-        return (enginePower / weight) * seconds;
+        return ((enginePower / weight) * seconds) * 3.6;
     }
 }
 
@@ -209,7 +209,7 @@ class Car extends Vehicle {
     }
 
     protected double calculateSpeed(float seconds) {
-        return super.calculateSpeed(seconds);
+        return ((enginePower / weight) * seconds) * 3.6;
     }
 }
 ```
@@ -248,7 +248,7 @@ class Vehicle {
     }
 
     double calculateSpeed(float seconds) {
-        return (enginePower / weight) * seconds;
+        return ((enginePower / weight) * seconds) * 3.6;
     }
 }
 ```
@@ -337,7 +337,7 @@ class Vehicle {
     }
 
     final double calculateSpeed(float seconds) {
-        return (enginePower / weight) * seconds;
+        return ((enginePower / weight) * seconds) * 3.6;
     }
 }
 
@@ -351,7 +351,7 @@ class Car extends Vehicle {
     }
 
     double calculateSpeed(float seconds) { // Erreur de compilation
-        return (enginePower / weight) * seconds;
+        return ((enginePower / weight) * seconds) * 3.6;
     }
 }
 ```
@@ -465,36 +465,36 @@ public class Main {
 ## 1.5. Le polymorphisme : héritage, liaison dynamique et overloading
 
 ```java
-class Vehicle {
-    double weight;
-    double enginePower;
+public class Vehicle {
+    private double weight;
+    private double enginePower;
 
-    Vehicle(double weight, double enginePower) {
+    public Vehicle(double weight, double enginePower) {
         this.weight = weight;
         this.enginePower = enginePower;
     }
 
-    double calculateSpeed(float seconds) {
-        return (enginePower / weight) * seconds;
+    public double calculateSpeed(float seconds) {
+        return ((enginePower / weight) * seconds) * 3.6;
     }
 }
 
 class Car extends Vehicle {
-    Car (double weight, double enginePower) {
+    public Car(double weight, double enginePower) {
         super(weight, enginePower);
     }
 
-    double calculateSpeed(float seconds) {
+    public double calculateSpeed(float seconds) {
         return super.calculateSpeed(seconds);
     }
 }
 
 class Truck extends Vehicle {
-    Truck(double weight, double enginePower) {
+    public Truck(double weight, double enginePower) {
         super(weight, enginePower);
     }
 
-    double calculateSpeed(float seconds) {
+    public double calculateSpeed(float seconds) {
         return super.calculateSpeed(seconds);
     }
 }
@@ -530,13 +530,13 @@ Le mot-clé `extends` signifie *"hérite de"*, c’est-à-dire que les classes `
 La classe `Vehicle` définit :
 
 ```java
-double calculateSpeed(float seconds) { ... }
+public double calculateSpeed(float seconds) { ... }
 ```
 
 Dans les sous-classes `Car` et `Truck`, la même méthode est redéfinie :
 
 ```java
-double calculateSpeed(float seconds) {
+public double calculateSpeed(float seconds) {
     return super.calculateSpeed(seconds);
 }
 ```
@@ -545,21 +545,21 @@ double calculateSpeed(float seconds) {
 **L’overloading** est un mécanisme qui détermine quelle méthode appeler en fonction des paramètres passés. Il permet de définir plusieurs méthodes avec le même nom, mais avec des paramètres différents. Ce choix est fait au moment de la compilation, ce qui permet au compilateur de savoir exactement quelle version de la méthode exécuter.
 
 ```java
-class Vehicle {
-    double weight;
-    double enginePower;
+public class Vehicle {
+    private double weight;
+    private double enginePower;
 
-    Vehicle(double weight, double enginePower) {
+    public Vehicle(double weight, double enginePower) {
         this.weight = weight;
         this.enginePower = enginePower;
     }
 
-    double calculateSpeed(float seconds) {
-        return (enginePower / weight) * seconds;
+    public double calculateSpeed(float seconds) {
+        return ((enginePower / weight) * seconds) * 3.6;
     }
 
-    double calculateSpeed(float seconds, double traction) {
-        return (enginePower / weight) * seconds * traction;
+    public double calculateSpeed(float seconds, double traction) {
+        return ((enginePower / weight) * seconds) * 3.6 * traction;
     }
 }
 ```
