@@ -1,5 +1,5 @@
 ---
-id: oop
+id: concepts-avances-poo
 title: 1. Concepts avancés de la programmation orientée objet (POO)
 ---
 

@@ -1,5 +1,5 @@
 ---
-id: english-guide
+id: maitriser-anglais
 title: Maîtriser l'anglais
 ---
 

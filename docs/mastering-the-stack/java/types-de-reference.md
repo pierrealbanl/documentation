@@ -1,5 +1,5 @@
 ---
-id: reference-types
+id: types-de-reference
 title: 2. Les types de référence
 ---
 

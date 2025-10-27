@@ -97,6 +97,7 @@ body {
 /* Removes default margin from sidebar items. */
 .theme-doc-sidebar-menu .menu__list-item {
     margin: 0px;
+    margin-left: 4px;
 }
 
 /* Defines general link styles inside the sidebar menu. */
@@ -111,6 +112,11 @@ body {
 .menu__link--active {
     margin-left: -4px;
     border-left: 4px solid #0f62fe;
+}
+
+/* Adds an extra left padding for collapsible section titles to visually indent them. */
+.menu__list-item-collapsible > .menu__link--active {
+    padding-left: calc(17px + 4px);
 }
 
 /* Removes border-radius and shadows from various menu and navbar elements. */
@@ -149,12 +155,14 @@ body {
     }
 }
 
+/* Defines the style of pagination sublabels in documentation pages. */
 .pagination-nav__sublabel {
     color: #343a3f;
     font-size: 12px;
     font-weight: 400;
 }
 
+/* Defines the style of pagination labels in documentation pages. */
 .pagination-nav__label {
     color: #0f62fe;
     font-size: 15px;

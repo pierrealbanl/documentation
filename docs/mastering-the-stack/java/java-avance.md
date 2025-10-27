@@ -1,5 +1,5 @@
 ---
-id: java-advanced
+id: java-avance
 title: 3. Java avancé
 ---
 

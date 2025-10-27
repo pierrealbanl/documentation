@@ -10,18 +10,18 @@ module.exports = {
                     type: 'category',
                     label: 'Java',
                     items: [
-                        'category/java/introduction',
-                        'category/java/oop',
-                        'category/java/reference-types',
-                        'category/java/java-advanced'
+                        'mastering-the-stack/java/introduction',
+                        'mastering-the-stack/java/concepts-avances-poo',
+                        'mastering-the-stack/java/types-de-reference',
+                        'mastering-the-stack/java/java-avance'
                     ]
                 },
-                'category/typescript',
-                'category/react',
-                'category/angular',
-                'category/css',
+                'mastering-the-stack/typescript',
+                'mastering-the-stack/react',
+                'mastering-the-stack/angular',
+                'mastering-the-stack/css',
             ],
         },
-        'english-guide'
+        'maitriser-anglais'
     ],
 }
