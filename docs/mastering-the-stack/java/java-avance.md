@@ -60,7 +60,15 @@ Voici un tableau récapitulatif des exceptions les plus courantes en Java :
 | `IllegalStateException`           | Indique qu’une méthode a été **appelée dans un état inapproprié** pour l’objet concerné.                            |
 
 
-## 3.2. Les threads : utilisation et différence entre `Thread` et `Runnable`
+## 3.2. Les lambdas expressions
+
+**Une lambda expression** permet de créer une fonction anonyme, c’est-à-dire une fonction sans nom explicite. Elles sont souvent utilisées avec des méthodes telles que `map()`, `filter()` ou `sorted()` pour rendre le code plus concis et expressif.
+
+:::warning 
+À noter que les lambdas ne peuvent être utilisées qu’avec des interfaces fonctionnelles, c’est-à-dire des interfaces ne contenant qu’une seule méthode abstraite.
+:::
+
+## 3.3. Les threads : utilisation et différence entre `Thread` et `Runnable`
 
 **Un thread** est une partie d’un programme qui s’exécute en parallèle avec d’autres parties. Autrement dit, c’est un flux d’instructions qui fonctionne simultanément avec le reste du programme.
 
