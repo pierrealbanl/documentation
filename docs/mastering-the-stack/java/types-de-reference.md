@@ -409,26 +409,26 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        List<String> Vehicle = new ArrayList<String>();
+        List<String> vehicle = new ArrayList<String>();
 
-        Vehicle.add("Ferrari");
-        Vehicle.add("Lamborghini");
-        Vehicle.add("Mercedes");
-        System.out.println("Les véhicules disponibles dans la liste : " + Vehicle);
+        vehicle.add("Ferrari");
+        vehicle.add("Lamborghini");
+        vehicle.add("Mercedes");
+        System.out.println("Les véhicules disponibles dans la liste : " + vehicle);
 
-        System.out.println(Vehicle.get(0));
+        System.out.println(vehicle.get(0));
 
-        Vehicle.set(2, "Audi");
-        System.out.println("Les véhicules disponibles dans la liste : " + Vehicle);
+        vehicle.set(2, "Audi");
+        System.out.println("Les véhicules disponibles dans la liste : " + vehicle);
 
-        System.out.println("La taille de la liste est " + Vehicle.size());
+        System.out.println("La taille de la liste est " + vehicle.size());
 
-        Vehicle.remove(1);
-        Vehicle.remove(1);
-        System.out.println("Les véhicules disponibles dans la liste : " + Vehicle);
+        vehicle.remove(1);
+        vehicle.remove(1);
+        System.out.println("Les véhicules disponibles dans la liste : " + vehicle);
 
-        Vehicle.clear();
-        System.out.println("Les véhicules disponibles dans la liste : " + Vehicle);
+        vehicle.clear();
+        System.out.println("Les véhicules disponibles dans la liste : " + vehicle);
     }
 }
 ```

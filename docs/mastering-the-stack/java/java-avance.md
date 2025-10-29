@@ -60,9 +60,37 @@ Voici un tableau récapitulatif des exceptions les plus courantes en Java :
 | `IllegalStateException`           | Indique qu’une méthode a été **appelée dans un état inapproprié** pour l’objet concerné.                            |
 
 
-## 3.2. Les lambdas expressions
+## 3.2. Les expressions lambda et les flux d’éléments
 
-**Une lambda expression** permet de créer une fonction anonyme, c’est-à-dire une fonction sans nom explicite. Elles sont souvent utilisées avec des méthodes telles que `map()`, `filter()` ou `sorted()` pour rendre le code plus concis et expressif.
+**Une expression lambda** permet de créer une fonction anonyme, c’est-à-dire une fonction sans nom explicite.
+
+```java
+() -> {...}
+```
+
+Elle est souvent utilisée avec des méthodes comme `filter()`, `map()` ou `sorted()` afin de rendre le code plus court, lisible et expressif. Pour utiliser ces méthodes, on emploie `.stream()`, une méthode qui convertit une structure de données en un flux d’éléments. Ce flux peut ensuite être filtré, trié ou transformé facilement, sans avoir besoin de boucles explicites.
+
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+public class Main {
+    public static void main(String[] args) {
+        List<String> vehicle = new ArrayList<String>();
+
+        vehicle.add("Ferrari");
+        vehicle.add("Lamborghini");
+        vehicle.add("Audi");
+        vehicle.add("Mercedes");
+        vehicle.stream()
+                .filter(v -> !v.equals("Lamborghini"))
+                .map(v -> v.toUpperCase())
+                .sorted()
+                .forEach(v -> System.out.println(v));
+    }
+}
+```
 
 :::warning 
 À noter que les lambdas ne peuvent être utilisées qu’avec des interfaces fonctionnelles, c’est-à-dire des interfaces ne contenant qu’une seule méthode abstraite.
