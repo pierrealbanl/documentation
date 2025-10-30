@@ -17,10 +17,12 @@ const config: Config = {
             {
                 docs: {
                     routeBasePath: '/',
-                    sidebarPath: require.resolve('./sidebars.ts')
+                    sidebarPath: './sidebars.ts',
                 },
                 blog: false,
-                theme: { customCss: require.resolve('./src/css/global.css') },
+                theme: {
+                    customCss: './src/css/global.css'
+                },
             },
         ],
     ],
