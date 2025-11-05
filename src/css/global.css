@@ -68,6 +68,18 @@ body {
     border-radius: 0;
 }
 
+h1 {
+    font-size: 31px;
+}
+
+h2 {
+    font-size: 27px;
+}
+
+h3 {
+    font-size: 23px;
+}
+
 /* Defines the general background and text color of the navigation bar. */
 .navbar {
     background-color: #ffffff;

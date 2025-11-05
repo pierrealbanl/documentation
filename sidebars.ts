@@ -16,10 +16,18 @@ module.exports = {
                         'mastering-the-stack/java/java-avance'
                     ]
                 },
-                'mastering-the-stack/typescript',
+                {
+                    type: 'category',
+                    label: 'TypeScript',
+                    items: [
+                        'mastering-the-stack/typescript/introduction',
+                        'mastering-the-stack/typescript/types-variables-et-fonctions',
+                        'mastering-the-stack/typescript/structures-donnees-et-poo'
+                    ]
+                },
                 'mastering-the-stack/react',
                 'mastering-the-stack/angular',
-                'mastering-the-stack/css',
+                'mastering-the-stack/css'
             ],
         },
         'maitriser-anglais'
