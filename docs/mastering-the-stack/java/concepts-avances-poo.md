@@ -52,8 +52,6 @@ public class Main {
 
 **Le constructeur** `Vehicle(double weight, double enginePower) {...}` est une méthode spéciale utilisée pour créer une nouvelle instance (ou objet) de type `Vehicle`. Il sert à initialiser les propriétés de l'objet  (`weight` et `enginePower`) avec les valeurs fournies en paramètre, comme dans l’exemple `new Vehicle(1380, 570);`. Ainsi, dès sa création, l’objet contient déjà les informations de l’utilisateur.
 
-# Concepts avancés de la programmation orientée objet (POO)
-
 ## 1.2. Modificateurs d’accès
 
 **Les modificateurs d’accès** permettent de contrôler qui peut accéder à une classe, une méthode, une propriété ou un constructeur. Ils jouent un rôle essentiel pour organiser le code, protéger les données sensibles et structurer la visibilité entre les différentes parties d’un programme.

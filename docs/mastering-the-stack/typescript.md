@@ -35,7 +35,7 @@ En effet, les types primitifs (`string`, `number`, `boolean`, etc.) **permettent
 
 Ainsi, même si les classes wrapper existent, elles ne sont pratiquement jamais utilisées car les primitives suffisent pour accéder aux fonctionnalités offertes.
 
-## 2. Les différentes manières de déclarer une variable en TypeScript
+## 2. Les différentes manières de déclarer une variable
 
 En **JavaScript**, lorsqu’on déclare une variable, son type est implicite et peut changer au fil des réassignations : une variable initialisée avec une chaîne peut ensuite recevoir un nombre, sans que le langage ne s’y oppose.
 
@@ -46,13 +46,13 @@ En revanche, en **TypeScript**, une variable déclarée avec un type explicite n
 Déclare une **variable constante**, c’est-à-dire une variable qui **ne peut pas être réassignée une fois initialisée**.
 
 ```ts
-function main(): void {
+function index(): void {
     const s: string = '';
     s = "Hello World!"; // Erreur : réaffectation interdite
     console.log(s);
 }
 
-main();
+index();
 ```
 
 :::warning
@@ -93,13 +93,13 @@ notAllowed();
 Déclare une **variable mutable**, c’est-à-dire une variable qui **peut être réassignée avec une nouvelle valeur**.
 
 ```ts
-function main(): void {
+function index(): void {
     let s: string = '';
     s = "Hello World!";
     console.log(s);
 }
 
-main();
+index();
 ```
 
 ## 3. Les fonctions régulières : déclaration et expression de fonction
@@ -107,7 +107,7 @@ main();
 En TypeScript, il y a plusieurs manières d’écrire une fonction régulière :
 
 ```ts
-function main(a: number, b: number): number {
+function index(a: number, b: number): number {
     return a + b;
 }
 
@@ -115,7 +115,7 @@ const functionInVariable = function(a: number, b: number): number {
     return a + b;
 }
 
-console.log(main(5, 5));
+console.log(index(5, 5));
 console.log(functionInVariable(5, 5));
 ```
 
@@ -167,7 +167,7 @@ console.log(ArrowFunctionExplicit(5,5));
 En TypeScript, **un objet** est une structure de données qui regroupe plusieurs valeurs sous forme de paires clé-valeur, chaque clé étant associée à un type précis. Il peut être créé librement sans passer par une classe, tandis qu’en Java, un objet provient toujours d’une classe définie à l’avance.
 
 ```ts
-function main(): void {
+function index(): void {
     const obj: {name: string, age: number} = {
         name: "Bob",
         age: 20
@@ -175,15 +175,89 @@ function main(): void {
     console.log(obj);
 }
 
-main();
+index();
 ```
 
-## 6. Les tableaux
+## 6. Les classes et héritage
+
+## 7. Modificateurs d’accès
+
+Pour les modificateurs d’accès, le fonctionnement est globalement le même qu’en Java, à une exception près : **TypeScript ne possède pas la notion de package**, et **les classes sont publiques par défaut**. Ainsi, la visibilité d’une classe ne se contrôle pas avec le mot-clé `public`, mais avec les mots-clés `export` et `import`, qui déterminent simplement si la classe peut être utilisée depuis un autre fichier :
+
+```ts title="Vehicle.ts"
+export class Vehicle {
+    public weight: number;
+    public enginePower: number;
+
+    public constructor(weight: number, enginePower: number) {
+        this.weight = weight;
+        this.enginePower = enginePower;
+    }
+
+    public calculateSpeed(seconds: number): number {
+        return ((this.enginePower / this.weight) * seconds) * 3.6;
+    }
+}
+```
+
+```ts title="index.ts"
+import {Vehicle} from "./vehicle";
+
+function index(): void {
+    const ferrari = new Vehicle(1380, 570);
+    console.log("La Ferrari après 10 secondes :", ferrari.calculateSpeed(10), "km/h");
+}
+
+index();
+```
+
+:::info
+Si la classe n’est utilisée que dans le même fichier, il n’est pas nécessaire de l’exporter.
+:::
+
+## 8. Modificateurs non liés à l'accès
+
+Pour les **modificateurs non liés à l’accès**, une différence importante est à noter : **TypeScript ne dispose pas de l’équivalent du modificateur `final` appliqué à une classe**, ce qui signifie qu’on ne peut pas empêcher l’héritage comme en Java. 
+
+En revanche, pour les propriétés, TypeScript fournit le modificateur `readonly`, qui joue un rôle similaire à `final` :
+
+| **Modificateur** | **Description**                                                 |
+| :--------------- |:----------------------------------------------------------------|
+| `readonly`       | Empêche une propriété d'être réassignée après l’initialisation. |
+
+```ts
+class Vehicle {
+    readonly weight: number;
+    readonly enginePower: number;
+
+    public constructor(weight: number, enginePower: number) {
+        this.weight = weight;
+        this.enginePower = enginePower;
+    }
+
+    public ferrariWeight(): number {
+        return this.weight = 1380; // Erreur de compilation
+    }
+
+    public calculateSpeed(seconds: number): number {
+        return ((this.enginePower / this.weight) * seconds) * 3.6;
+    }
+}
+
+function index(): void {
+    const ferrari = new Vehicle(1380, 570);
+    console.log("La Ferrari après 10 secondes :", ferrari.calculateSpeed(10), "km/h");
+}
+
+index();
+```
+
+## 9. Les tableaux
 
 **Les tableaux** sont plus simples à manipuler grâce aux méthodes intégrées directement dans le langage, tandis qu’en Java, leur utilisation est plus stricte et leur taille fixe dès la création.
 
 ```ts
-function main(): void {
+function index(): void {
     const arrayNumbers: number[] = [5, 5];
     arrayNumbers[0] = 10;
     arrayNumbers[1] = 10;
@@ -195,15 +269,15 @@ function main(): void {
     console.log(arrayString);
 }
 
-main();
+index();
 ```
 
-### 6.1. Transformation et filtrage des tableaux avec `.map()` et `.filter()`
+### 9.1. Transformation et filtrage des tableaux avec `.map()` et `.filter()`
 
 La méthode `.map()` parcourt chaque élément d’un tableau, applique une fonction à chacun d’eux et renvoie un nouveau tableau contenant les valeurs transformées. Le tableau d’origine reste inchangé, car les modifications sont stockées dans une nouvelle variable :
 
 ```ts
-function main(): void {
+function index(): void {
     const arrayNumbers: number[] = [5, 5];
     const doubledNumbers: number[] = arrayNumbers.map(function (n: number): number {
         return n * 2;
@@ -217,14 +291,14 @@ function main(): void {
     console.log(upperCaseNames);
 }
 
-main();
+index();
 ```
 
 :::info
 De plus, les fonctions fléchées peuvent être utilisées :
 
 ```ts
-function main(): void {
+function index(): void {
     const arrayNumbers: number[] = [5, 5];
     const doubledNumbers: number[] = arrayNumbers.map((n: number): number => n * 2);
     console.log(doubledNumbers);
@@ -234,14 +308,14 @@ function main(): void {
     console.log(upperCaseNames);
 }
 
-main();
+index();
 ```
 :::
 
 La méthode `.filter()` parcourt chaque élément d’un tableau, applique une condition à chacun d’eux et renvoie un nouveau tableau contenant uniquement les éléments qui remplissent cette condition. Le tableau d’origine reste inchangé, car le filtrage est enregistré dans une nouvelle variable.
 
 ```ts
-function main(): void {
+function index(): void {
     const arrayNumbers: number[] = [5, 5];
     const doubledNumbers: number[] = arrayNumbers.filter((n: number): boolean => n < 5);
     console.log(doubledNumbers);
@@ -251,15 +325,15 @@ function main(): void {
     console.log(upperCaseNames);
 }
 
-main();
+index();
 ```
 
-## 7. Typage réutilisable avec `type`
+## 10. Typage réutilisable avec `type`
 
-`type` permet de donner un alias à une forme de donnée (objet, tableau, fonction, etc.) afin de la réutiliser facilement dans le code.
+`type` permet de donner un alias à une forme de donnée (objet, tableau, fonction, etc...) afin de la réutiliser facilement dans le code.
 
 ```ts
-function main(): void {
+function index(): void {
     type User = {
         name: string,
         age: number
@@ -278,10 +352,10 @@ function main(): void {
     console.log(arrayObj);
 }
 
-main();
+index();
 ```
 
-## 8. Les interfaces
+## 11. Les interfaces
 
 En TypeScript, **une interface** sert à décrire la structure d’un objet pour le typage, alors qu’en Java, elle sert à imposer un comportement que les classes doivent implémenter.
 
@@ -291,7 +365,7 @@ interface Vehicle {
     enginePower: number,
 }
 
-function main(): void {
+function index(): void {
     const ferrari: Vehicle = {
         weight: 1380,
         enginePower: 570,
@@ -299,7 +373,7 @@ function main(): void {
     console.log(ferrari);
 }
 
-main();
+index();
 ```
 
 Ici, l’interface permet de décrire un objet simple, tout comme le mot-clé `type` peut le faire. La différence apparaît à partir du moment où l’on manipule des **classes** : une `interface` peut en effet **définir des méthodes** qui seront ensuite **implémentées dans une classe** pour créer des **instances** (des objets) :
@@ -312,17 +386,17 @@ interface Vehicle {
 }
 
 class Car implements Vehicle {
-    constructor(public weight: number, public enginePower: number) {}
+    public constructor(public weight: number, public enginePower: number) {}
 
-    calculateSpeed(seconds: number): number {
-        return (this.enginePower / this.weight) * seconds;
+    public calculateSpeed(seconds: number): number {
+        return ((this.enginePower / this.weight) * seconds) * 3.6;
     }
 }
 
-function main(): void {
+function index(): void {
     const ferrari = new Car(1380, 570);
-    console.log(ferrari.calculateSpeed(10));
+    console.log("La Ferrari après 10 secondes :", ferrari.calculateSpeed(10), "km/h");
 }
 
-main();
+index();
 ```
