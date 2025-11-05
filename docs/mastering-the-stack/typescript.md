@@ -178,81 +178,7 @@ function index(): void {
 index();
 ```
 
-## 6. Les classes et héritage
-
-## 7. Modificateurs d’accès
-
-Pour les modificateurs d’accès, le fonctionnement est globalement le même qu’en Java, à une exception près : **TypeScript ne possède pas la notion de package**, et **les classes sont publiques par défaut**. Ainsi, la visibilité d’une classe ne se contrôle pas avec le mot-clé `public`, mais avec les mots-clés `export` et `import`, qui déterminent simplement si la classe peut être utilisée depuis un autre fichier :
-
-```ts title="Vehicle.ts"
-export class Vehicle {
-    public weight: number;
-    public enginePower: number;
-
-    public constructor(weight: number, enginePower: number) {
-        this.weight = weight;
-        this.enginePower = enginePower;
-    }
-
-    public calculateSpeed(seconds: number): number {
-        return ((this.enginePower / this.weight) * seconds) * 3.6;
-    }
-}
-```
-
-```ts title="index.ts"
-import {Vehicle} from "./vehicle";
-
-function index(): void {
-    const ferrari = new Vehicle(1380, 570);
-    console.log("La Ferrari après 10 secondes :", ferrari.calculateSpeed(10), "km/h");
-}
-
-index();
-```
-
-:::info
-Si la classe n’est utilisée que dans le même fichier, il n’est pas nécessaire de l’exporter.
-:::
-
-## 8. Modificateurs non liés à l'accès
-
-Pour les **modificateurs non liés à l’accès**, une différence importante est à noter : **TypeScript ne dispose pas de l’équivalent du modificateur `final` appliqué à une classe**, ce qui signifie qu’on ne peut pas empêcher l’héritage comme en Java. 
-
-En revanche, pour les propriétés, TypeScript fournit le modificateur `readonly`, qui joue un rôle similaire à `final` :
-
-| **Modificateur** | **Description**                                                 |
-| :--------------- |:----------------------------------------------------------------|
-| `readonly`       | Empêche une propriété d'être réassignée après l’initialisation. |
-
-```ts
-class Vehicle {
-    readonly weight: number;
-    readonly enginePower: number;
-
-    public constructor(weight: number, enginePower: number) {
-        this.weight = weight;
-        this.enginePower = enginePower;
-    }
-
-    public ferrariWeight(): number {
-        return this.weight = 1380; // Erreur de compilation
-    }
-
-    public calculateSpeed(seconds: number): number {
-        return ((this.enginePower / this.weight) * seconds) * 3.6;
-    }
-}
-
-function index(): void {
-    const ferrari = new Vehicle(1380, 570);
-    console.log("La Ferrari après 10 secondes :", ferrari.calculateSpeed(10), "km/h");
-}
-
-index();
-```
-
-## 9. Les tableaux
+## 6. Les tableaux
 
 **Les tableaux** sont plus simples à manipuler grâce aux méthodes intégrées directement dans le langage, tandis qu’en Java, leur utilisation est plus stricte et leur taille fixe dès la création.
 
@@ -272,7 +198,7 @@ function index(): void {
 index();
 ```
 
-### 9.1. Transformation et filtrage des tableaux avec `.map()` et `.filter()`
+### 6.1. Transformation et filtrage des tableaux avec `.map()` et `.filter()`
 
 La méthode `.map()` parcourt chaque élément d’un tableau, applique une fonction à chacun d’eux et renvoie un nouveau tableau contenant les valeurs transformées. Le tableau d’origine reste inchangé, car les modifications sont stockées dans une nouvelle variable :
 
@@ -328,7 +254,7 @@ function index(): void {
 index();
 ```
 
-## 10. Typage réutilisable avec `type`
+## 7. Typage réutilisable avec `type`
 
 `type` permet de donner un alias à une forme de donnée (objet, tableau, fonction, etc...) afin de la réutiliser facilement dans le code.
 
@@ -355,7 +281,117 @@ function index(): void {
 index();
 ```
 
-## 11. Les interfaces
+## 8. Les classes, héritage, modificateurs et interface : différences par rapport à Java
+
+Le fonctionnement des classes et de l’héritage en TypeScript est très proche de celui de Java : on utilise également le mot-clé `class`, ainsi que `extends` pour créer une classe dérivée. 
+
+En revanche, le constructeur doit toujours être défini avec le mot-clé `constructor`, et la déclaration des propriétés se fait en indiquant d’abord un modificateur d’accès (par défaut `public`), suivi du nom de la propriété puis de son type, par exemple : `public weight: number;` :
+
+```ts
+class Vehicle {
+    weight: number;
+    enginePower: number;
+
+    constructor(weight: number, enginePower: number) {
+        this.weight = weight;
+        this.enginePower = enginePower;
+    }
+
+    calculateSpeed(seconds: number): number {
+        return ((this.enginePower / this.weight) * seconds) * 3.6;
+    }
+}
+
+function index(): void {
+    const ferrari = new Vehicle(1380, 570);
+    console.log("La Ferrari après 10 secondes :", ferrari.calculateSpeed(10), "km/h");
+}
+
+index();
+```
+
+En TypeScript, il existe une **syntaxe abrégée** permettant de déclarer les propriétés directement dans la signature du constructeur. Cette écriture remplace à la fois la déclaration des propriétés et leur affectation dans le constructeur.
+
+Le comportement reste exactement le même, mais la syntaxe est simplement plus concise :
+
+```ts
+class Vehicle {
+    constructor(public weight: number, public enginePower: number) {}
+
+    calculateSpeed(seconds: number): number {
+        return ((this.enginePower / this.weight) * seconds) * 3.6;
+    }
+}
+
+function index(): void {
+    const ferrari = new Vehicle(1380, 570);
+    console.log("La Ferrari après 10 secondes :", ferrari.calculateSpeed(10), "km/h");
+}
+
+index();
+```
+
+### 8.1. Modificateurs d’accès
+
+Pour les modificateurs d’accès, le fonctionnement est globalement le même qu’en Java, à une exception près : **TypeScript ne possède pas la notion de package**, et **les classes sont publiques par défaut**. Ainsi, la visibilité d’une classe ne se contrôle pas avec le mot-clé `public`, mais avec les mots-clés `export` et `import`, qui déterminent simplement si la classe peut être utilisée depuis un autre fichier :
+
+```ts title="vehicle.ts"
+export class Vehicle {
+    public constructor(public weight: number, public enginePower: number) {}
+
+    public calculateSpeed(seconds: number): number {
+        return ((this.enginePower / this.weight) * seconds) * 3.6;
+    }
+}
+```
+
+```ts title="index.ts"
+import {Vehicle} from "./vehicle";
+
+function index(): void {
+    const ferrari = new Vehicle(1380, 570);
+    console.log("La Ferrari après 10 secondes :", ferrari.calculateSpeed(10), "km/h");
+}
+
+index();
+```
+
+:::info
+Si la classe n’est utilisée que dans le même fichier, il n’est pas nécessaire de l’exporter.
+:::
+
+### 8.2. Modificateurs non liés à l'accès
+
+Pour les **modificateurs non liés à l’accès**, une différence importante est à noter : **TypeScript ne dispose pas de l’équivalent du modificateur `final` appliqué à une classe**, ce qui signifie qu’on ne peut pas empêcher l’héritage comme en Java. 
+
+En revanche, pour les propriétés, TypeScript fournit le modificateur `readonly`, qui joue un rôle similaire à `final` :
+
+| **Modificateur** | **Description**                                                 |
+| :--------------- |:----------------------------------------------------------------|
+| `readonly`       | Empêche une propriété d'être réassignée après l’initialisation. |
+
+```ts
+class Vehicle {
+    public constructor(readonly weight: number, readonly enginePower: number) {}
+
+    public ferrariWeight(): number {
+        return this.weight = 1380; // Erreur de compilation
+    }
+
+    public calculateSpeed(seconds: number): number {
+        return ((this.enginePower / this.weight) * seconds) * 3.6;
+    }
+}
+
+function index(): void {
+    const ferrari = new Vehicle(1380, 570);
+    console.log("La Ferrari après 10 secondes :", ferrari.calculateSpeed(10), "km/h");
+}
+
+index();
+```
+
+### 8.3. Les interfaces
 
 En TypeScript, **une interface** sert à décrire la structure d’un objet pour le typage, alors qu’en Java, elle sert à imposer un comportement que les classes doivent implémenter.
 
