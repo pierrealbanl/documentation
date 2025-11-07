@@ -13,4 +13,4 @@ Contrairement à JavaScript, interprété directement par les navigateurs, **le 
 
 ### Préambule
 
-Cette documentation recommande d’acquérir d’abord les bases de Java, en particulier la programmation orientée objet, afin de faciliter l’apprentissage de TypeScript.
+Dans cette documentation, de nombreuses comparaisons avec Java seront évoquées. En effet, les deux langages reposent sur des concepts similaires, mais présentent des différences importantes à connaître. Comme Java reste une référence dans la programmation orientée objet, avoir une bonne compréhension de ses principes permet de mieux appréhender TypeScript et ses fondements. Ainsi, il est recommandé d’avoir acquis les bases de Java avant d’aborder cette documentation, afin de faciliter et accélérer l’apprentissage de TypeScript. Cependant, certaines explications porteront uniquement sur des spécificités propres à TypeScript, sans lien direct avec Java.

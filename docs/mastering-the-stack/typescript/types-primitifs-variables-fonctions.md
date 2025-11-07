@@ -1,9 +1,9 @@
 ---
-id: types-variables-et-fonctions
-title: 1. Les types, variables et fonctions
+id: types-primitifs-variables-fonctions
+title: 1. Types primitifs, variables et fonctions
 ---
 
-# Les types, variables et fonctions
+# Types primitifs, variables et fonctions
 
 ## 1.1. Types primitifs et spéciaux
 
