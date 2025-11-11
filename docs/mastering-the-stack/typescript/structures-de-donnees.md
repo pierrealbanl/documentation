@@ -27,15 +27,11 @@ index();
 
 ```ts
 function index(): void {
-    const arrayNumbers: number[] = [5, 5];
-    arrayNumbers[0] = 10;
-    arrayNumbers[1] = 10;
-    console.log(arrayNumbers);
+    const array: string[] = ["Bob", "Alice"];
 
-    const arrayString: string[] = ["Bob", "Alice"];
-    arrayString[0] = "Eve";
-    arrayString[1] = "Alisson";
-    console.log(arrayString);
+    array[0] = "Eve";
+    array[1] = "Alisson";
+    console.log(array);
 }
 
 index();
@@ -46,76 +42,37 @@ index();
 
 ```ts
 function index(): void {
-    const arrayNumbers = new Array<number>();
-    arrayNumbers.push(5);
-    arrayNumbers.push(5);
-    arrayNumbers[0] = 10;
-    arrayNumbers[1] = 10;
-    console.log(arrayNumbers);
-
-    const arrayString = new Array<string>();
-    arrayString.push("Bob");
-    arrayString.push("Alice");
-    arrayString[0] = "Eve";
-    arrayString[1] = "Alisson";
-    console.log(arrayString);
+    const array = new Array<string>();
+    
+    array.push("Bob");
+    array.push("Alice");
+    array[0] = "Eve";
+    array[1] = "Alisson";
+    console.log(array);
 }
 
 index();
 ```
 :::
 
-### 3.2.1. Transformation et filtrage des tableaux avec `.map()` et `.filter()`
+### 3.2.1. Utiliser `map`, `filter`, `includes`, `sort` et `forEach` en TypeScript
 
-La méthode `.map()` parcourt chaque élément d’un tableau, applique une fonction à chacun d’eux et renvoie un nouveau tableau contenant les valeurs transformées. Le tableau d’origine reste inchangé, car les modifications sont stockées dans une nouvelle variable :
-
-```ts
-function index(): void {
-    const arrayNumbers: number[] = [5, 5];
-    const doubledNumbers: number[] = arrayNumbers.map(function (n: number): number {
-        return n * 2;
-    });
-    console.log(doubledNumbers);
-
-    const arrayString: string[] = ["Bob", "Alice"];
-    const upperCaseNames: string[] = arrayString.map(function (s: string): string {
-        return s.toUpperCase();
-    });
-    console.log(upperCaseNames);
-}
-
-index();
-```
-
-:::info
-De plus, les fonctions fléchées peuvent être utilisées :
+Contrairement à Java où l’on doit passer par `stream()`, en TypeScript les méthodes de manipulation s’appliquent directement sur le tableau lui-même.
 
 ```ts
 function index(): void {
-    const arrayNumbers: number[] = [5, 5];
-    const doubledNumbers: number[] = arrayNumbers.map((n: number): number => n * 2);
-    console.log(doubledNumbers);
+    const array: string[] = ["Bob", "Alice", "Eve", "Alisson"];
 
-    const arrayString: string[] = ["Bob", "Alice"];
-    const upperCaseNames: string[] = arrayString.map((s: string): string => s.toUpperCase());
-    console.log(upperCaseNames);
-}
+    const filteredArray: string[] = array
+        .map((s: string): string => s.toUpperCase())
+        .filter((s: string): boolean => s === s.toUpperCase());
+    console.log(filteredArray);
 
-index();
-```
-:::
+    console.log(filteredArray.includes("ALICE"));
 
-La méthode `.filter()` parcourt chaque élément d’un tableau, applique une condition à chacun d’eux et renvoie un nouveau tableau contenant uniquement les éléments qui remplissent cette condition. Le tableau d’origine reste inchangé, car le filtrage est enregistré dans une nouvelle variable.
+    console.log(filteredArray.sort());
 
-```ts
-function index(): void {
-    const arrayNumbers: number[] = [5, 5];
-    const doubledNumbers: number[] = arrayNumbers.filter((n: number): boolean => n < 5);
-    console.log(doubledNumbers);
-
-    const arrayString: string[] = ["Bob", "Alice"];
-    const upperCaseNames: string[] = arrayString.filter((s: string): boolean => s.startsWith('A'));
-    console.log(upperCaseNames);
+    filteredArray.forEach((value: string): void => console.log(value));
 }
 
 index();

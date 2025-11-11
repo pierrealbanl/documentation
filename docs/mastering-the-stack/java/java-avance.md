@@ -68,26 +68,36 @@ Voici un tableau récapitulatif des exceptions les plus courantes en Java :
 () -> {...}
 ```
 
-Elle est souvent utilisée avec des méthodes comme `filter()`, `map()` ou `sorted()` afin de rendre le code plus court, lisible et expressif. Pour utiliser ces méthodes, on emploie `.stream()`, une méthode qui convertit une structure de données en un flux d’éléments. Ce flux peut ensuite être filtré, trié ou transformé facilement, sans avoir besoin de boucles explicites.
+Elle est souvent utilisée avec la méthode `.stream()`, qui convertit une structure de données en un flux d’éléments. Un flux d'éléments permet de parcourir et de traiter les données sans les recopier ni les stocker une seconde fois. Il dispose ensuite de plusieurs méthodes pour manipuler ces données :
 
+| Méthode     | Description                                                                                                                                                                            |
+|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `map()`     | Parcourt chaque élément d’un Stream, applique une transformation à chacun d’eux, puis renvoie un nouveau Stream contenant les valeurs transformées.                                    |
+| `filter()`  | Parcourt chaque élément d’un Stream, vérifie s’il respecte une condition donnée, puis renvoie un nouveau Stream contenant uniquement les éléments qui remplissent cette condition.     |
+| `sorted()`  | Trie les éléments d’un Stream selon un ordre défini (par défaut l’ordre naturel, comme l’ordre alphabétique pour les chaînes), puis renvoie un nouveau Stream avec les éléments triés. |
+| `forEach()` | Parcourt chaque élément d’un Stream et exécute une action finale sur chacun d’eux.                                                                                                     |
+| `collect()` | Convertit le Stream final en une autre structure (souvent une collection comme `List` ou `Set`), ce qui permet de récupérer les données transformées sous une forme réutilisable.      | 
 
 ```java
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
-        List<String> vehicle = new ArrayList<String>();
+        List<String> vehicle = new ArrayList<>();
 
         vehicle.add("Ferrari");
         vehicle.add("Lamborghini");
         vehicle.add("Audi");
         vehicle.add("Mercedes");
-        vehicle.stream()
-                .filter(v -> !v.equals("Lamborghini"))
+        
+        List<String> stream = vehicle.stream()
                 .map(v -> v.toUpperCase())
+                .filter(v -> !v.equals("LAMBORGHINI"))
                 .sorted()
-                .forEach(v -> System.out.println(v));
+                .collect(Collectors.toList());
+        System.out.println(stream);
     }
 }
 ```
