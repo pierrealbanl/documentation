@@ -40,7 +40,7 @@ Le comportement reste exactement le même, mais la syntaxe est simplement plus c
 
 ```ts
 class Vehicle {
-    constructor(public weight: number, public enginePower: number) {}
+    constructor(private weight: number, private enginePower: number) {}
 
     calculateSpeed(seconds: number): number {
         return ((this.enginePower / this.weight) * seconds) * 3.6;

@@ -23,7 +23,8 @@ module.exports = {
                         'mastering-the-stack/typescript/introduction',
                         'mastering-the-stack/typescript/types-primitifs-variables-fonctions',
                         'mastering-the-stack/typescript/classes-heritage-modificateurs',
-                        'mastering-the-stack/typescript/structures-de-donnees'
+                        'mastering-the-stack/typescript/structures-de-donnees',
+                        'mastering-the-stack/typescript/types-génériques'
                     ]
                 },
                 'mastering-the-stack/react',

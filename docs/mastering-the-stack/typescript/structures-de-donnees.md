@@ -55,7 +55,7 @@ index();
 ```
 :::
 
-### 3.2.1. Utiliser `map`, `filter`, `includes`, `sort` et `forEach` en TypeScript
+### 3.2.1. Manipuler les tableaux avec `map`, `filter`, `includes`, `sort` et `forEach`
 
 Contrairement à Java où l’on doit passer par `stream()`, en TypeScript les méthodes de manipulation s’appliquent directement sur le tableau lui-même.
 
@@ -83,23 +83,27 @@ index();
 `type` permet de donner un alias à une forme de donnée (objet, tableau, fonction, etc...) afin de la réutiliser facilement dans le code.
 
 ```ts
+type Vehicle = {
+    manufacturer: string;
+    weight: number;
+    enginePower: number;
+}
+
 function index(): void {
-    type User = {
-        name: string,
-        age: number
+    const vehicle: Vehicle = {
+        manufacturer: "Ferrari",
+        weight: 1380,
+        enginePower: 570
     };
 
-    const obj: User = {
-        name: "Bob",
-        age: 20
-    };
-    console.log(obj);
+    console.log(vehicle);
 
-    const arrayObj: User[] = [
-        {name: "Bob", age: 20},
-        {name: "Alice", age: 25}
+    const vehicleList: Vehicle[] = [
+        {manufacturer: "Ferrari", weight: 1380, enginePower: 570},
+        {manufacturer: "Mercedes", weight: 11700, enginePower: 625}
     ];
-    console.log(arrayObj);
+
+    console.log(vehicleList);
 }
 
 index();
@@ -111,8 +115,8 @@ En TypeScript, **une interface** sert à décrire la structure d’un objet pour
 
 ```ts
 interface Vehicle {
-    weight: number,
-    enginePower: number,
+    weight: number;
+    enginePower: number;
 }
 
 function index(): void {
@@ -130,9 +134,7 @@ Ici, l’interface permet de décrire un objet simple, tout comme le mot-clé `t
 
 ```ts
 interface Vehicle {
-    weight: number,
-    enginePower: number,
-    calculateSpeed(seconds: number): number,
+    calculateSpeed(seconds: number): number;
 }
 
 class Car implements Vehicle {

@@ -336,7 +336,7 @@ public class Main {
 Dans notre contexte, étant donné que les propriétés weight et enginePower correspondent à des valeurs entières, il est nécessaire d’indiquer le type générique Integer au moment de l’instanciation de l’objet `Vehicle<Integer>`.
 :::
 
-:::danger
+:::warning
 À noter que les opérations arithmétiques ne sont pas possibles avec les types génériques, puisque le compilateur ne peut pas savoir si le type utilisé correspond à un nombre ou non. En effet, un paramètre générique peut représenter tout type d’objet.
 
 ```java
