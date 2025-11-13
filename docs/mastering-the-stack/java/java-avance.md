@@ -88,10 +88,10 @@ public class Main {
         List<String> vehicle = new ArrayList<>();
 
         vehicle.add("Ferrari");
+        vehicle.add("Mercedes");
         vehicle.add("Lamborghini");
         vehicle.add("Audi");
-        vehicle.add("Mercedes");
-        
+
         List<String> stream = vehicle.stream()
                 .map(v -> v.toUpperCase())
                 .filter(v -> !v.equals("LAMBORGHINI"))

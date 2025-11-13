@@ -413,8 +413,8 @@ public class Main {
         List<String> vehicle = new ArrayList<>();
 
         vehicle.add("Ferrari");
-        vehicle.add("Lamborghini");
         vehicle.add("Mercedes");
+        vehicle.add("Lamborghini");
         System.out.println("Les véhicules disponibles dans la liste : " + vehicle);
 
         System.out.println(vehicle.get(0));
@@ -446,8 +446,8 @@ public class Main {
         List<String> vehicle = new ArrayList<>();
 
         vehicle.add("Ferrari");
-        vehicle.add("Lamborghini");
         vehicle.add("Mercedes");
+        vehicle.add("Lamborghini");
 
         Collections.sort(vehicle);
         System.out.println("Les véhicules disponibles dans la liste après le tri : " + vehicle);
@@ -471,16 +471,16 @@ public class Main {
 
         vehicle.add("Ferrari");
         vehicle.add("Ferrari"); // Impossible d’ajouter un doublon
-        vehicle.add("Lamborghini");
         vehicle.add("Mercedes");
+        vehicle.add("Lamborghini");
         System.out.println("Les véhicules disponibles dans la liste : " + vehicle);
 
         System.out.println(vehicle.contains("Mercedes"));
 
         System.out.println("La taille de la liste est " + vehicle.size());
 
-        vehicle.remove("Mercedes");
         vehicle.remove("Lamborghini");
+        vehicle.remove("Mercedes");
         System.out.println("Les véhicules disponibles dans la liste : " + vehicle);
 
         vehicle.clear();
@@ -507,8 +507,8 @@ public class Main {
         List<String> vehicle = new LinkedList<>();
 
         vehicle.add("Ferrari");
-        vehicle.add("Lamborghini");
         vehicle.add("Mercedes");
+        vehicle.add("Lamborghini");
 
         System.out.println(vehicle.get(0));
 
@@ -523,7 +523,7 @@ public class Main {
         System.out.println("Les véhicules disponibles dans la liste après le tri : " + vehicle);
 
         vehicle.remove("Audi");
-        vehicle.remove("Lamborghini");
+        vehicle.remove("Mercedes");
         System.out.println("Les véhicules disponibles dans la liste : " + vehicle);
 
         vehicle.clear();
@@ -547,8 +547,8 @@ public class Main {
         Map<String, Integer> vehicle = new HashMap<>();
 
         vehicle.put("Ferrari", 570);
-        vehicle.put("Lamborghini", 740);
         vehicle.put("Mercedes", 625);
+        vehicle.put("Lamborghini", 740);
         System.out.println("Les véhicules disponibles dans la liste : " + vehicle);
 
         System.out.println(vehicle.get("Ferrari"));
@@ -558,8 +558,8 @@ public class Main {
 
         System.out.println("La taille de la liste est " + vehicle.size());
 
-        vehicle.remove("Mercedes");
         vehicle.remove("Lamborghini");
+        vehicle.remove("Mercedes");
         System.out.println("Les véhicules disponibles dans la liste : " + vehicle);
 
         vehicle.clear();

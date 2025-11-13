@@ -165,16 +165,16 @@ function index(): void {
 
     vehicle.add("Ferrari");
     vehicle.add("Ferrari"); // Impossible d’ajouter un doublon
-    vehicle.add("Lamborghini");
     vehicle.add("Mercedes");
+    vehicle.add("Lamborghini");
     console.log("Les véhicules disponibles dans la liste :", vehicle);
 
     console.log(vehicle.has("Mercedes"));
 
     console.log("La taille de la liste est", vehicle.size);
 
-    vehicle.delete("Mercedes");
     vehicle.delete("Lamborghini");
+    vehicle.delete("Mercedes");
     console.log("Les véhicules disponibles dans la liste :", vehicle);
 
     vehicle.clear();
@@ -195,8 +195,8 @@ function index(): void {
     const vehicle = new Map<string, number>();
 
     vehicle.set("Ferrari", 570);
-    vehicle.set("Lamborghini", 740);
     vehicle.set("Mercedes", 625);
+    vehicle.set("Lamborghini", 740);
     console.log("Les véhicules disponibles dans la liste :", vehicle);
 
     console.log(vehicle.get("Ferrari"));
@@ -205,8 +205,8 @@ function index(): void {
 
     console.log("La taille de la liste est", vehicle.size);
 
-    vehicle.delete("Mercedes");
     vehicle.delete("Lamborghini");
+    vehicle.delete("Mercedes");
     console.log("Les véhicules disponibles dans la liste :", vehicle);
 
     vehicle.clear();
