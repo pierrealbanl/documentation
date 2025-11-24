@@ -104,6 +104,92 @@ index();
 
 ## 5.5. Contraintes sur les types génériques : `extends`
 
-### 5.5.1. Génériques avec plusieurs contraintes
+En TypeScript, on peut **imposer des restrictions** sur un type générique pour limiter ce qu’il peut représenter. On utilise pour cela le mot-clé `extends`.
+
+C’est utile lorsque la fonction ou la classe générique **a besoin de certaines propriétés**, ou doit fonctionner **uniquement sur certains types.**
+
+```ts
+type Vehicle<T, U> = {
+    manufacturer: T;
+    weight: U;
+    enginePower: U;
+}
+
+function index<T extends Vehicle<string, number>>(arg: T): void {
+    console.log(arg.manufacturer, arg.weight, arg.enginePower);
+}
+
+index({manufacturer: "Ferrari", weight: 1380, enginePower: 570});
+```
+
+:::warning
+L’exemple ci-dessus illustre simplement le fonctionnement des contraintes génériques. Avec `T extends Vehicle<string, number>`, on indique uniquement que `T` doit être un objet possédant au minimum ces trois propriétés.
+
+Cependant, si l’on souhaitait obliger l’objet à correspondre exactement à la structure `Vehicle<T, U>` (et non un objet pouvant contenir d’autres propriétés supplémentaires), on pourrait tout à fait se passer du générique dans la fonction et typer directement le paramètre :
+
+```ts
+type Vehicle<T, U> = {
+    manufacturer: T;
+    weight: U;
+    enginePower: U;
+}
+
+function index(arg: Vehicle<string, number>): void {
+    console.log(arg.manufacturer, arg.weight, arg.enginePower);
+}
+
+index({manufacturer: "Ferrari", weight: 1380, enginePower: 570});
+```
+:::
+
+### 5.5.1. Contraindre un générique à une famille de types
+
+Il est possible de limiter un type générique à un ensemble précis de valeurs. Cette technique est utile lorsque l’on veut restreindre les valeurs autorisées, par exemple pour éviter les fautes de frappe ou imposer des valeurs métier spécifiques.
+
+```ts
+function index<T extends "Ferrari" | "Mercedes">(arg: T): T {
+    return arg;
+}
+
+console.log(index("Ferrari"));
+console.log(index("Mercedes"));
+console.log(index("Lamborghini")); // Erreur : "Lamborghini" n’est pas assignable à "Ferrari" | "Mercedes"
+```
+
+:::info
+Si l’on souhaite imposer à un type générique à la fois une structure (définie par `Vehicle<T>`) et une famille de valeurs possibles (pour la propriété `manufacturer`), on peut procéder ainsi :
+
+```ts
+type Vehicle<T> = {
+    manufacturer: "Ferrari" | "Mercedes";
+    weight: T;
+    enginePower: T;
+}
+
+function index(arg: Vehicle<number>): Vehicle<number> {
+    return arg;
+}
+
+console.log(index({manufacturer: "Ferrari", weight: 1380, enginePower: 570}));
+console.log(index({manufacturer: "Mercedes", weight: 1380, enginePower: 570}));
+console.log(index({manufacturer: "Lamborghini", weight: 1380, enginePower: 570})); // Erreur : "Lamborghini" n’est pas assignable à "Ferrari" | "Mercedes"
+```
+:::
+
+### 5.5.2. Contraindre un générique à un autre type générique
+
+Il est également possible de contraindre un type générique en fonction d’un autre type générique. C’est particulièrement utile lorsque l’on veut garantir qu’un type hérite ou respecte la structure d’un autre type.
+
+```ts
+function index<T, U extends T>(first: T, second: U): [T, U] {
+    return [first, second];
+}
+
+console.log(index("Bob", "Alice"));
+console.log(index(20, 25));
+console.log(index("Bob", 20)); // Erreur : le second argument n’est pas du même type que le premier
+```
+
+`T` peut être n’importe quel type, et `U` doit être un type assignable à `T`, c’est-à-dire du même type.
 
 ## 5.6. Génériques avec `keyof` et `typeof`
