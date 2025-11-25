@@ -1,7 +1,6 @@
 module.exports = {
     adminSidebar: [
         'intro',
-        'raccourcis-ide',
         {
             type: 'category',
             label: 'Mastering the Stack: Complete Guide',
@@ -28,7 +27,15 @@ module.exports = {
                         'mastering-the-stack/typescript/types-generiques'
                     ]
                 },
-                'mastering-the-stack/react',
+                {
+                    type: 'category',
+                    label: 'React',
+                    items: [
+                        'mastering-the-stack/react/introduction',
+                        'mastering-the-stack/react/bases-react',
+                        'mastering-the-stack/react/realiser-une-application-nextjs',
+                    ]
+                },
                 'mastering-the-stack/angular',
                 'mastering-the-stack/css'
             ],
