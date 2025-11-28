@@ -124,13 +124,13 @@ Dans cet exemple, si `isVisible` vaut `true`, le texte affiché sera *"Hello Wor
 
 ## 1.4. Utilisation de `.map()` et différence avec TypeScript
 
-La méthode `.map()` n’est pas utilisée de la même manière en TypeScript qu’en React. En TypeScript, elle sert principalement à **transformer un tableau en un autre tableau** :
+La méthode `.map()` n’est pas utilisée de la même manière en TypeScript qu’en React. En TypeScript, elle sert principalement à **transformer un tableau en un autre tableau** : `["Bob", "Alice", "Eve"]` devient `["BOB", "ALICE", "EVE"]`
 
 ```tsx
 // `["Bob", "Alice", "Eve"]` devient `["BOB", "ALICE", "EVE"]`
 ```
 
-En React, en revanche, `.map()` est le plus souvent utilisé pour **convertir un tableau en une liste d’éléments JSX,** afin d’être rendus dans l’interface utilisateur :
+En revenche, en React, `.map()` est le plus souvent utilisé pour **convertir un tableau en une liste d’éléments JSX,** afin d’être rendus dans l’interface utilisateur :
 
 ```tsx title="React pur"
 import {useState} from 'react';
@@ -155,3 +155,19 @@ function Index() {
 
 export default Index;
 ```
+
+:::info
+`key` permet à React d’identifier chaque élément d’une liste de façon unique, exactement comme si on parcourait la liste avec une boucle `for`.
+
+Avant insertion en tête :
+
+| **`items`** | Bob | Alice | Eve | 
+|:------------|:----|:------|:----|
+| **`key`**   | 0   | 1     | 2   | 
+
+Après insertion en tête :
+
+| **`items`** | Alisson | Bob | Alice | Eve | 
+|:------------|:--------|:----|:------|:----|
+| **`key`**   | 0       | 1   | 2     | 3   | 
+:::
