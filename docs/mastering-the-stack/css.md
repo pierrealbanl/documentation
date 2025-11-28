@@ -84,9 +84,3 @@ Voici quelques tableaux illustrant les principales possibilités offertes par le
 | **Valeur**  | **Description** | 
 |:------------|:----------------|
 | `sticky`    |                 |
-
-## À venir
-
-- Pourquoi on utilise `a` : `.test a {}` ?
-- `text-decoration: none;` : désactive les décorations du texte déjà présentes.
-- `align-content` et `justify-content` :

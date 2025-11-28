@@ -24,8 +24,3 @@ export default function RootLayout({children}: Readonly<{children: React.ReactNo
 Ici, `{children}: Readonly<{children: React.ReactNode}>` sert à afficher la page correspondant à la route actuelle, tout en conservant les éléments principaux du layout (comme un header ou un footer). Il n’est pas nécessaire de comprendre en détail `React.ReactNode` : ce qu’il faut retenir, c’est son rôle. Ainsi, l’utilité de RootLayout est d’organiser la structure globale du site, c’est-à-dire son squelette.
 
 ## 2.2. Créer des animations fluides avec Motion
-
-## À venir
-
-- Composant `Link` / `Image`
-- Comment créer un style : `className={styles.header}` avec l'import `import styles from "./header.module.css"`
